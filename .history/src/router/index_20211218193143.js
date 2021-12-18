@@ -39,7 +39,7 @@ const routes = [
             {
                 path: '/article/:id',
                 name: '查看文章',
-                component: () => import('../views/article'),
+                component: () => import('../views/article/article'),
                 meta: {
                     title: '博客'
                 }

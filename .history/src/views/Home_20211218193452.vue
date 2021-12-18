@@ -38,6 +38,7 @@
       <!--阅读全文按钮-->
       <div class="div-btn">
         <a class="color-btn" href="javascript:;" @click.prevent="toArticle(article.id)"
+        <!-- <a class="color-btn" href="javascript:;" @click.prevent="toArticle(article.id)" -->
           >阅读全文</a
         >
       </div>

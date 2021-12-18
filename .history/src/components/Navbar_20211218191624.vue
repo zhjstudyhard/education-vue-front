@@ -46,10 +46,10 @@
         <el-dropdown-item
           v-for="(type, index) in types"
           :key="index"
-          @click.native="categoryRoute(type.dictionaryValue)"
+          @click.native="categoryRoute(type.typeName)"
           style="color: white"
         >
-          {{ type.dictionaryValue }}
+          {{ type.typeName }}
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -181,7 +181,7 @@ export default {
     getTypes() {
       let data = { dictionaryType: "ARTICLE_CATEGORY" };
       queryDictionaryAllPage(data).then((response) => {
-        this.types = response.data.data;
+        this.types = res.data.data;
       });
       // const _this = this;
       // this.$axios.get("/types").then((res) => {

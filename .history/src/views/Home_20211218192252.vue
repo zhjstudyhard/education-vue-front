@@ -9,7 +9,7 @@
       <div class="home-title">
         <h2>
           <router-link
-            :to="{ name: 'article', params: { id: article.id } }"
+            :to="{ name: 'Blog', params: { blogId: article.id } }"
             class="blog-link"
             >{{ article.title }}
           </router-link>
@@ -37,7 +37,7 @@
       />
       <!--阅读全文按钮-->
       <div class="div-btn">
-        <a class="color-btn" href="javascript:;" @click.prevent="toArticle(article.id)"
+        <a class="color-btn" href="javascript:;" @click.prevent="toBlog(blog)"
           >阅读全文</a
         >
       </div>
@@ -73,8 +73,8 @@ export default {
   },
   methods: {
     //跳转到博客详情页
-    toArticle(id) {
-      this.$router.push(`/article/${id}`);
+    toBlog(blog) {
+      this.$router.push(`/blog/${blog.id}`);
     },
     //获取分类表
     // getTypes() {
@@ -109,6 +109,7 @@ export default {
   created() {
     // this.getTypes();
     this.getData(1);
+    //console.log(this.blogs)
   },
 
   mounted() {},

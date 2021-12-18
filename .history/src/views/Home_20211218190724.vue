@@ -9,7 +9,7 @@
       <div class="home-title">
         <h2>
           <router-link
-            :to="{ name: 'article', params: { id: article.id } }"
+            :to="{ name: 'Blog', params: { blogId: article.id } }"
             class="blog-link"
             >{{ article.title }}
           </router-link>
@@ -37,7 +37,7 @@
       />
       <!--阅读全文按钮-->
       <div class="div-btn">
-        <a class="color-btn" href="javascript:;" @click.prevent="toArticle(article.id)"
+        <a class="color-btn" href="javascript:;" @click.prevent="toBlog(blog)"
           >阅读全文</a
         >
       </div>
@@ -73,17 +73,17 @@ export default {
   },
   methods: {
     //跳转到博客详情页
-    toArticle(id) {
-      this.$router.push(`/article/${id}`);
+    toBlog(blog) {
+      this.$router.push(`/blog/${blog.id}`);
     },
     //获取分类表
-    // getTypes() {
-    //   const _this = this;
-    //   this.$axios.get("/types").then((res) => {
-    //     _this.types = res.data.data;
-    //   });
-    //   //console.log(this.types)
-    // },
+    getTypes() {
+      const _this = this;
+      this.$axios.get("/types").then((res) => {
+        _this.types = res.data.data;
+      });
+      //console.log(this.types)
+    },
     //分页获取博客
     getData(currentPage) {
       if (currentPage !== 1) {
@@ -102,13 +102,31 @@ export default {
         this.pageSize = response.data.pageSize;
         this.pageShow = 1;
       });
-      //改变页号后返回顶部
+      // const _this = this
+      // this.$axios.get('/blog/queryBlogsPage?currentPage=' + currentPage).then((res) => {
+      //   // _this.blogs = res.data.data.records
+      //   _this.blogs = res.data.data.data
+      //   _this.currentPage = res.data.data.current
+      //   _this.total = res.data.data.total
+      //   // _this.pageSize = res.data.data.size
+      //   _this.pageSize = res.data.data.pageSize
+      //   _this.pageShow = 1
+      //   // for (var i in _this.blogs) {
+      //   //   for (var j in _this.types) {
+      //   //     if (_this.blogs[i].typeId == _this.types[j].id) {
+      //   //       _this.blogs[i].typeName = _this.types[j].typeName
+      //   //     }
+      //   //   }
+
+      //   // }
+      // })//改变页号后返回顶部
       this.scrollToTop();
     },
   },
   created() {
-    // this.getTypes();
+    this.getTypes();
     this.getData(1);
+    //console.log(this.blogs)
   },
 
   mounted() {},

@@ -46,10 +46,10 @@
         <el-dropdown-item
           v-for="(type, index) in types"
           :key="index"
-          @click.native="categoryRoute(type.dictionaryValue)"
+          @click.native="categoryRoute(type.typeName)"
           style="color: white"
         >
-          {{ type.dictionaryValue }}
+          {{ type.typeName }}
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>

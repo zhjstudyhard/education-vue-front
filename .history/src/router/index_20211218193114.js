@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-12-18 17:21:59
- * @LastEditTime: 2021-12-18 19:31:43
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-12-18 19:30:22
+ * @LastEditors: your name
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \education-vue-front\src\router\index.js
  */
@@ -39,7 +39,7 @@ const routes = [
             {
                 path: '/article/:id',
                 name: '查看文章',
-                component: () => import('../views/article'),
+                component: Blog,
                 meta: {
                     title: '博客'
                 }
