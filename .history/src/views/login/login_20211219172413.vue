@@ -72,6 +72,13 @@
           ></el-button>
         </router-link>
       </el-form-item>
+      <!-- <el-form-item>
+        <router-link to="/register">
+          <el-button type=""
+            >没有账号，立即注册<i class="el-icon-arrow-right el-icon--right"></i
+          ></el-button>
+        </router-link>
+      </el-form-item> -->
     </el-form>
   </div>
 </template>
@@ -79,7 +86,6 @@
 <script>
 import { validUsername } from "../../util/validate";
 import { encrypt } from "../../util/rsaEncrypt";
-import {login} from '../../api/login/userLogin'
 export default {
   name: "Login",
   data() {
@@ -169,13 +175,14 @@ export default {
         if (valid) {
           this.loading = true;
           user.password = encrypt(user.password);
-          let data = {"username": user.username.trim(),"password": user.password}
           // this.$store.dispatch('user/login', this.loginForm)
-          login(data).then((response) => {
-              this.$store.commit('SET_TOKEN', response.token)
-            // _this.$store.commit('SET_USERINFO', res.data.data)
-              // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});
-              this.$router.push("/");
+          this.$store
+            .dispatch("user/login", user)
+            .then(() => {
+              this.$router.push({
+                path: this.redirect || "/",
+                query: this.otherQuery,
+              });
               this.loading = false;
             })
             .catch(() => {
@@ -253,7 +260,7 @@ $light_gray: #eee;
 
 .login-container {
   height: 100%;
-  // min-height: 100%;
+  min-height: 100%;
   width: 100%;
   background-color: $bg;
   overflow: hidden;

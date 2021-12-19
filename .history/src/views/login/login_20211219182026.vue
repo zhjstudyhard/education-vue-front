@@ -172,10 +172,10 @@ export default {
           let data = {"username": user.username.trim(),"password": user.password}
           // this.$store.dispatch('user/login', this.loginForm)
           login(data).then((response) => {
-              this.$store.commit('SET_TOKEN', response.token)
+              this.$store.commit('SET_TOKEN', token)
             // _this.$store.commit('SET_USERINFO', res.data.data)
               // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});
-              this.$router.push("/");
+               this.$router.push("/");
               this.loading = false;
             })
             .catch(() => {

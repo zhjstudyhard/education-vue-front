@@ -72,6 +72,31 @@
           ></el-button>
         </router-link>
       </el-form-item>
+
+      <div class="right-menu">
+        <el-dropdown
+          class="avatar-container right-menu-item hover-effect"
+          trigger="click"
+        >
+          <div class="avatar-wrapper">
+            <img
+              :src="avatar + '?imageView2/1/w/80/h/80'"
+              class="user-avatar"
+            />
+            <i class="el-icon-caret-bottom" />
+          </div>
+          <el-dropdown-menu slot="dropdown">
+            <router-link to="/profile/index">
+              <el-dropdown-item>个人信息</el-dropdown-item>
+            </router-link>
+            <el-dropdown-item divided @click.native="logout">
+              <span style="display: block"
+                >退出登录<el-badge is-dot></el-badge
+              ></span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </el-form>
   </div>
 </template>
@@ -79,7 +104,6 @@
 <script>
 import { validUsername } from "../../util/validate";
 import { encrypt } from "../../util/rsaEncrypt";
-import {login} from '../../api/login/userLogin'
 export default {
   name: "Login",
   data() {
@@ -169,13 +193,14 @@ export default {
         if (valid) {
           this.loading = true;
           user.password = encrypt(user.password);
-          let data = {"username": user.username.trim(),"password": user.password}
           // this.$store.dispatch('user/login', this.loginForm)
-          login(data).then((response) => {
-              this.$store.commit('SET_TOKEN', response.token)
-            // _this.$store.commit('SET_USERINFO', res.data.data)
-              // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});
-              this.$router.push("/");
+          this.$store
+            .dispatch("user/login", user)
+            .then(() => {
+              this.$router.push({
+                path: this.redirect || "/",
+                query: this.otherQuery,
+              });
               this.loading = false;
             })
             .catch(() => {

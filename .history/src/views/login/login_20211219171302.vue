@@ -1,15 +1,9 @@
 <template>
   <div class="login-container">
-    <el-form
-      ref="loginForm"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-      autocomplete="on"
-      label-position="left"
-    >
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
+
       <div class="title-container">
-        <h3 class="title">登 录</h3>
+        <h3 class="title">登  录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -27,12 +21,7 @@
         />
       </el-form-item>
 
-      <el-tooltip
-        v-model="capsTooltip"
-        content="Caps lock is On"
-        placement="right"
-        manual
-      >
+      <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
         <el-form-item prop="password">
           <span class="svg-container">
             <svg-icon icon-class="password" />
@@ -52,94 +41,74 @@
             @keyup.enter.native="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
-            <svg-icon
-              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
-            />
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
           </span>
         </el-form-item>
       </el-tooltip>
-      <el-form-item>
-        <el-button
-          :loading="loading"
-          type="primary"
-          style="width: 50%"
-          @click.native.prevent="handleLogin"
-          >登录</el-button
-        >
-        <router-link to="/register">
-          <el-button type="" style="width: 50%"
-            >没有账号，立即注册<i class="el-icon-arrow-right el-icon--right"></i
-          ></el-button>
-        </router-link>
-      </el-form-item>
+
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
     </el-form>
-  </div>
 </template>
 
 <script>
-import { validUsername } from "../../util/validate";
-import { encrypt } from "../../util/rsaEncrypt";
-import {login} from '../../api/login/userLogin'
+import { validUsername } from '../../util/validate'
+import { encrypt } from '../../util/rsaEncrypt'
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
       // if (!validUsername(value)) {
       //   callback(new Error('Please enter the correct user name'))
       // } else {
-      callback();
+        callback()
       // }
-    };
+    }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error("The password can not be less than 6 digits"));
+        callback(new Error('The password can not be less than 6 digits'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       loginForm: {
         // username: 'admin',
         // password: '111111'
-        username: "",
-        password: "",
+        username: '',
+        password: ''
       },
       loginRules: {
-        username: [
-          { required: true, trigger: "blur", validator: validateUsername },
-        ],
-        password: [
-          { required: true, trigger: "blur", validator: validatePassword },
-        ],
+        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
-      passwordType: "password",
+      passwordType: 'password',
       capsTooltip: false,
       loading: false,
       showDialog: false,
       redirect: undefined,
-      otherQuery: {},
-    };
+      otherQuery: {}
+    }
   },
   watch: {
     $route: {
-      handler: function (route) {
-        const query = route.query;
+      handler: function(route) {
+        const query = route.query
         if (query) {
-          this.redirect = query.redirect;
-          this.otherQuery = this.getOtherQuery(query);
+          this.redirect = query.redirect
+          this.otherQuery = this.getOtherQuery(query)
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   created() {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === "") {
-      this.$refs.username.focus();
-    } else if (this.loginForm.password === "") {
-      this.$refs.password.focus();
+    if (this.loginForm.username === '') {
+      this.$refs.username.focus()
+    } else if (this.loginForm.password === '') {
+      this.$refs.password.focus()
     }
   },
   destroyed() {
@@ -147,64 +116,61 @@ export default {
   },
   methods: {
     checkCapslock(e) {
-      const { key } = e;
-      this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
+      const { key } = e
+      this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
     },
     showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
       } else {
-        this.passwordType = "password";
+        this.passwordType = 'password'
       }
       this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
+        this.$refs.password.focus()
+      })
     },
     handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
-        const user = {
+      this.$refs.loginForm.validate(valid => {
+         const user = {
           username: this.loginForm.username,
           password: this.loginForm.password,
-        };
+        }
         if (valid) {
-          this.loading = true;
-          user.password = encrypt(user.password);
-          let data = {"username": user.username.trim(),"password": user.password}
+          this.loading = true
+          user.password = encrypt(user.password)
           // this.$store.dispatch('user/login', this.loginForm)
-          login(data).then((response) => {
-              this.$store.commit('SET_TOKEN', response.token)
-            // _this.$store.commit('SET_USERINFO', res.data.data)
-              // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});
-              this.$router.push("/");
-              this.loading = false;
+          this.$store.dispatch('user/login', user)
+            .then(() => {
+              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+              this.loading = false
             })
             .catch(() => {
-              this.loading = false;
-            });
+              this.loading = false
+            })
         } else {
-          console.log("error submit!!");
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== "redirect") {
-          acc[cur] = query[cur];
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur]
         }
-        return acc;
-      }, {});
-    },
-  },
-};
+        return acc
+      }, {})
+    }
+  }
+}
 </script>
 
 <style lang="scss">
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg: #283443;
-$light_gray: #fff;
+$bg:#283443;
+$light_gray:#fff;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -247,13 +213,12 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg: #2d3a4b;
-$dark_gray: #889aa4;
-$light_gray: #eee;
+$bg:#2d3a4b;
+$dark_gray:#889aa4;
+$light_gray:#eee;
 
 .login-container {
-  height: 100%;
-  // min-height: 100%;
+  min-height: 100%;
   width: 100%;
   background-color: $bg;
   overflow: hidden;

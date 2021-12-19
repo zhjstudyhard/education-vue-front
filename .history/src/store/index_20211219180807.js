@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-12-18 17:21:59
- * @LastEditTime: 2021-12-19 18:17:59
+ * @LastEditTime: 2021-12-19 18:07:48
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \education-vue-front\src\store\index.js
  */
-// import {login} from '../api/login/userLogin'
+import {login} from '../api/login/userLogin'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -20,19 +20,19 @@ export default new Vuex.Store({
     },
     mutations: {
         // user login
-        // login({commit}, userInfo) {
-        //     const {username,password} = userInfo
-        //     return new Promise((resolve, reject) => {
-        //         login({username: username.trim(),password: password}).then(response => {
-        //             const {data} = response
-        //             commit('SET_TOKEN', data.token)
-        //             // setToken(data.token)
-        //             resolve()
-        //         }).catch(error => {
-        //             reject(error)
-        //         })
-        //     })
-        // },
+        login({commit}, userInfo) {
+            const {username,password} = userInfo
+            return new Promise((resolve, reject) => {
+                login({username: username.trim(),password: password}).then(response => {
+                    const {data} = response
+                    commit('SET_TOKEN', data.token)
+                    // setToken(data.token)
+                    resolve()
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
         //set
         SET_TOKEN: (state, token) => {
             state.token = token

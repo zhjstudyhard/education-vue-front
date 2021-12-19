@@ -79,7 +79,7 @@
 <script>
 import { validUsername } from "../../util/validate";
 import { encrypt } from "../../util/rsaEncrypt";
-import {login} from '../../api/login/userLogin'
+import {login} from '../api/login/userLogin'
 export default {
   name: "Login",
   data() {
@@ -169,13 +169,12 @@ export default {
         if (valid) {
           this.loading = true;
           user.password = encrypt(user.password);
-          let data = {"username": user.username.trim(),"password": user.password}
+          let data = {"username": username.trim(),"password": password}
           // this.$store.dispatch('user/login', this.loginForm)
-          login(data).then((response) => {
-              this.$store.commit('SET_TOKEN', response.token)
+          login.then((response) => {
+              this.$store.commit('SET_TOKEN', token)
             // _this.$store.commit('SET_USERINFO', res.data.data)
-              // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});
-              this.$router.push("/");
+              this.$router.push({path: this.redirect || "/",query: this.otherQuery,});
               this.loading = false;
             })
             .catch(() => {

@@ -135,13 +135,10 @@
         trigger="click"
       >
         <div class="avatar-wrapper">
-          <!-- <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" /> -->
+          <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
           <i class="el-icon-caret-bottom" />
         </div>
-        <el-dropdown-menu
-          slot="dropdown"
-          style="background-color: #333333; padding: 20px"
-        >
+        <el-dropdown-menu slot="dropdown" style="background-color: #333333; padding: 20px">
           <router-link to="/profile/index">
             <el-dropdown-item>个人信息</el-dropdown-item>
           </router-link>
