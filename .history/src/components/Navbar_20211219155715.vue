@@ -113,7 +113,7 @@
         padding: 20px;
         margin-left: 700px;
       "
-      to="/login"
+      to="/about"
     >
       登录
     </router-link>
@@ -125,7 +125,7 @@
         center
         margin-left: 1350px;
       "
-      to="/register"
+      to="/about"
     >
       注册
     </router-link>

@@ -94,7 +94,7 @@
       class="right item m-search"
       placeholder="请输入内容"
       popper-class="m-search-item"
-      style="margin-left: 500px"
+      style="margin-left: 300px"
       suffix-icon="el-icon-search"
       @select="handleSelect"
     >
@@ -106,26 +106,17 @@
     </el-autocomplete>
     <router-link
       :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
-      class="item"
-      style="
-        text-decoration-line: none;
-        color: white;
-        padding: 20px;
-        margin-left: 700px;
-      "
-      to="/login"
+  
+      style="text-decoration-line: none; color: white; padding: 20px;margin-left: 800px"
+      to="/about"
     >
       登录
     </router-link>
     <router-link
       :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
-      style="
-        text-decoration-line: none;
-        color: white;
-        center
-        margin-left: 1350px;
-      "
-      to="/register"
+    
+      style="text-decoration-line: none; color: white; padding: 20px;margin-left:820px"
+      to="/about"
     >
       注册
     </router-link>
@@ -314,7 +305,7 @@ export default {
 }
 /deep/ .el-autocomplete {
   position: absolute;
-  right: 200px;
+  right: 100px;
 }
 </style>
 

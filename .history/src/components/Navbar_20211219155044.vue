@@ -111,21 +111,22 @@
         text-decoration-line: none;
         color: white;
         padding: 20px;
-        margin-left: 700px;
+        margin-left: 800px;
       "
-      to="/login"
+      to="/about"
     >
       登录
     </router-link>
     <router-link
       :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
+      class="item"
       style="
         text-decoration-line: none;
         color: white;
-        center
-        margin-left: 1350px;
+        padding: 20px;
+        margin-left: 800px;
       "
-      to="/register"
+      to="/about"
     >
       注册
     </router-link>
@@ -314,7 +315,7 @@ export default {
 }
 /deep/ .el-autocomplete {
   position: absolute;
-  right: 200px;
+  right: 100px;
 }
 </style>
 

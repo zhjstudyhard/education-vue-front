@@ -125,7 +125,7 @@
         center
         margin-left: 1350px;
       "
-      to="/register"
+      to="/about"
     >
       注册
     </router-link>

@@ -84,6 +84,7 @@ export default {
       if (this.$route.params && this.$route.params.id) {
         let data = { id: this.$route.params.id };
         getArticleById(data).then((response) => {
+          console.log("article: ", response.data);
           this.article = response.data;
         });
       }

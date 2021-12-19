@@ -22,7 +22,7 @@ const routes = [
     {
         path: '/login',
         name: '登录',
-        component: () => import('../views/login/login'),
+        component: () => import('../views/article'),
         meta: {
             title: '登录'
         }
@@ -30,9 +30,9 @@ const routes = [
     {
         path: '/register',
         name: '注册',
-        component: () => import('../views/login/register'),
+        component: () => import('../views/article'),
         meta: {
-            title: '注册'
+            title: '登录'
         }
     },
 

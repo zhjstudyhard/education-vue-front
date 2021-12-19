@@ -22,11 +22,14 @@
       </el-link>
 
       <!--      <div class="markdown-body" v-html="blog.content" v-viewer="{movable: false}"></div>-->
-      <markdown-it-vue-light
+      <!-- <markdown-it-vue-light
         class="md-body"
         :content="article.content"
         v-viewer="{ movable: false }"
-      />
+      /> -->
+      <el-form-item label="文章正文" prop="content">
+        <mavon-editor :content = "article.content"></mavon-editor>
+      </el-form-item>
     </div>
 
     <!--版权信息-->
@@ -84,6 +87,7 @@ export default {
       if (this.$route.params && this.$route.params.id) {
         let data = { id: this.$route.params.id };
         getArticleById(data).then((response) => {
+          console.log("article: ", response.data);
           this.article = response.data;
         });
       }

@@ -9,7 +9,7 @@
         class="ui header item m-blue"
         style="display: inline; padding: 20px 20px 20px 60px"
       >
-        橘白学习平台
+        Skymo's Blog
       </h3>
     </router-link>
 
@@ -104,30 +104,11 @@
         <span class="content">{{ item.content }}</span>
       </template>
     </el-autocomplete>
-    <router-link
-      :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
-      class="item"
-      style="
-        text-decoration-line: none;
-        color: white;
-        padding: 20px;
-        margin-left: 700px;
-      "
-      to="/login"
-    >
-      登录
+    <router-link to="/profile/index">
+      <el-dropdown-item>登录</el-dropdown-item>
     </router-link>
-    <router-link
-      :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
-      style="
-        text-decoration-line: none;
-        color: white;
-        center
-        margin-left: 1350px;
-      "
-      to="/register"
-    >
-      注册
+    <router-link to="/profile/index">
+      <el-dropdown-item>注册</el-dropdown-item>
     </router-link>
   </div>
 </template>
@@ -314,7 +295,7 @@ export default {
 }
 /deep/ .el-autocomplete {
   position: absolute;
-  right: 200px;
+  right: 100px;
 }
 </style>
 

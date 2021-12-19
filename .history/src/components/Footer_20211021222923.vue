@@ -70,10 +70,10 @@ export default {
     //获取pv和uv
     getPVAndUV(){
       const _this = this
-      // this.$axios.get('/visitornum').then(res => {
-      //   _this.uv = res.data.data.uv
-      //   _this.pv = res.data.data.pv
-      // })
+      this.$axios.get('/visitornum').then(res => {
+        _this.uv = res.data.data.uv
+        _this.pv = res.data.data.pv
+      })
 
     }
   },

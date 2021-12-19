@@ -32,7 +32,7 @@ const routes = [
         name: '注册',
         component: () => import('../views/login/register'),
         meta: {
-            title: '注册'
+            title: '登录'
         }
     },
 
