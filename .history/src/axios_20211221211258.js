@@ -7,11 +7,7 @@
  * @FilePath: \blog-view\src\axios.js
  */
 import axios from 'axios'
-// import Element, { Message } from "element-ui";
-import {
-    MessageBox,
-    Message
-} from 'element-ui'
+import Element, { Message } from "element-ui";
 import store from "./store";
 import router from "./router";
 

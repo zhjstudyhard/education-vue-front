@@ -1,17 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-10-21 16:13:44
- * @LastEditTime: 2021-12-21 21:12:58
+ * @LastEditTime: 2021-12-21 21:10:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \blog-view\src\axios.js
  */
 import axios from 'axios'
-// import Element, { Message } from "element-ui";
-import {
-    MessageBox,
-    Message
-} from 'element-ui'
+import Element from "element-ui";
 import store from "./store";
 import router from "./router";
 

@@ -134,21 +134,7 @@
     </router-link>
     <div class="right-menu" v-if="isShow">
       <el-dropdown
-        style="
-          margin-top: 5px;
-          position: relative;
-          display: inline-block;
-          padding: 0 8px;
-          height: 100%;
-          font-size: 18px;
-          color: #5a5e66;
-          vertical-align: text-bottom;
-          cursor: pointer;
-          transition: background 0.3s;
-          &:hover {
-            background: rgba(0, 0, 0, 0.025);
-          }
-        "
+        class="avatar-container right-menu-item hover-effect"
         trigger="click"
       >
         <div class="avatar-wrapper">

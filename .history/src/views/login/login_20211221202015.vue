@@ -179,7 +179,7 @@ export default {
               this.$store.commit("SET_TOKEN", response.token);
               //查询用户信息
               getUserInfo().then((response) => {
-                // console.log("userInfo: ",response.data)
+                console.log("userInfo: ",response.data)
                 this.$store.commit("SET_USERINFO", response.data);
               });
               // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});

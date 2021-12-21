@@ -104,9 +104,7 @@
         <span class="content">{{ item.content }}</span>
       </template>
     </el-autocomplete>
-
     <router-link
-      v-if="!isShow"
       :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
       class="item"
       style="
@@ -120,7 +118,6 @@
       登录
     </router-link>
     <router-link
-      v-if="!isShow"
       :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
       style="
         text-decoration-line: none;
@@ -132,36 +129,13 @@
     >
       注册
     </router-link>
-    <div class="right-menu" v-if="isShow">
+    <div class="right-menu">
       <el-dropdown
-        style="
-          margin-top: 5px;
-          position: relative;
-          display: inline-block;
-          padding: 0 8px;
-          height: 100%;
-          font-size: 18px;
-          color: #5a5e66;
-          vertical-align: text-bottom;
-          cursor: pointer;
-          transition: background 0.3s;
-          &:hover {
-            background: rgba(0, 0, 0, 0.025);
-          }
-        "
+        class="avatar-container right-menu-item hover-effect"
         trigger="click"
       >
         <div class="avatar-wrapper">
           <!-- <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" /> -->
-          <img
-            :src="avatar"
-            style="
-              cursor: pointer;
-              width: 40px;
-              height: 40px;
-              border-radius: 10px;
-            "
-          />
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu
@@ -195,10 +169,9 @@ export default {
       timer: null,
       mobileHide: false,
       ifShowInput: false,
-      isShow: false,
-      avatar: "",
     };
   },
+
   methods: {
     debounceQuery(queryString, callback) {
       this.timer && clearTimeout(this.timer);
@@ -259,21 +232,15 @@ export default {
       queryDictionaryAllPage(data).then((response) => {
         this.types = response.data.data;
       });
+      // const _this = this;
+      // this.$axios.get("/types").then((res) => {
+      //   _this.types = res.data.data;
+      // });
     },
   },
   mounted() {
     if (this.getIsPhone()) {
       this.mobileHide = true;
-    }
-  },
-  created() {
-    if (localStorage.getItem("token")) {
-      this.isShow = true;
-    }
-    if (sessionStorage.getItem("userInfo")) {
-      let userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-      // console.log("userInfo: ",)
-      this.avatar = userInfo.avatar;
     }
   },
 };
@@ -373,7 +340,6 @@ export default {
   position: absolute;
   right: 200px;
 }
-
 .right-menu {
   float: right;
   height: 100%;

@@ -145,9 +145,6 @@
           vertical-align: text-bottom;
           cursor: pointer;
           transition: background 0.3s;
-          &:hover {
-            background: rgba(0, 0, 0, 0.025);
-          }
         "
         trigger="click"
       >
