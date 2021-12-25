@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-10-21 16:13:44
- * @LastEditTime: 2021-12-25 16:01:03
+ * @LastEditTime: 2021-12-25 15:45:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \blog-view\src\axios.js
@@ -90,8 +90,7 @@ axios.interceptors.response.use(response => {
             duration: 5 * 1000
         })
         return Promise.reject(error)
-    }
-)
+    })
 
 /**
  * 封装get方法

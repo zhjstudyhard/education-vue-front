@@ -35,7 +35,7 @@
       />
       <!--阅读全文按钮-->
     </el-card>
-    <div v-if="pageShow" class="home-page">
+   <div v-if="pageShow" class="home-page">
       <el-pagination
         :current-page="currentPage"
         :page-size="pageSize"
@@ -109,8 +109,8 @@ export default {
 
   watch: {
     $route(to, from) {
-      this.type = this.$route.params.type;
-      this.getData(1);
+      this.categoryName = this.$route.params.name;
+      this.getBlogByTypeName(1);
     },
   },
   created() {

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-10-21 16:13:44
- * @LastEditTime: 2021-12-25 16:01:03
+ * @LastEditTime: 2021-12-25 14:20:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \blog-view\src\axios.js
@@ -46,7 +46,12 @@ axios.interceptors.response.use(response => {
             store.commit("SET_TOKEN", response.headers['authorization']);
         }
         const res = response.data;
-        // 当结果的code是否为20000的情况
+        // const identification = response.headers.identification
+        // if (identification) {
+        //     //保存身份标识到localStorage
+        //     window.localStorage.setItem('identification', identification)
+        // }
+        // 当结果的code是否为200的情况
         if (res.code !== 20000) {
             Message({
                 message: res.message || 'Error',
@@ -82,16 +87,49 @@ axios.interceptors.response.use(response => {
         } else {
             return res
         }
+        // if (res.code === 20000) {
+        //     return res
+        // } else {
+        //     //弹窗异常信息
+        //     Element.Message({
+        //         message: response.data.msg,
+        //         type: 'error',
+        //         duration: 2 * 1000
+        //     })
+        //     // 直接拒绝往下面返回结果信息
+        //     return Promise.reject(response.data.msg)
+        // }
     },
     error => {
+        console.log('err' + error) // for debug
         Message({
             message: error.message,
             type: 'error',
             duration: 5 * 1000
         })
         return Promise.reject(error)
-    }
-)
+        // console.log('err' + error) // for debug
+        // if (error.response.data) {
+        //     error.message = error.response.data.msg
+        // }
+        // // 根据请求状态觉得是否登录或者提示其他
+        // if (error.response.status === 401 || error.response.status === 500) {
+        //     store.commit('REMOVE_INFO');
+        //     router.push({
+        //         path: '/login'
+        //     });
+        //     error.message = '请重新登录';
+        // }
+        // if (error.response.status === 403) {
+        //     error.message = '权限不足，无法访问';
+        // }
+        // Element.Message({
+        //     message: error.message,
+        //     type: 'error',
+        //     duration: 3 * 1000
+        // })
+        // return Promise.reject(error)
+    })
 
 /**
  * 封装get方法

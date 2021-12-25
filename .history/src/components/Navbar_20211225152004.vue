@@ -253,9 +253,8 @@ export default {
           _this.msgError("请求失败");
         });
     },
-    //文章分类跳转
-    categoryRoute(type) {
-      this.$router.push(`/category/${type}`);
+    categoryRoute(name) {
+      this.$router.push(`/category/${name}`);
     },
 
     handleSelect(item) {

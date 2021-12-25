@@ -14,8 +14,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        // token: localStorage.getItem("token"),
-        token: sessionStorage.getItem("token"),
+        token: localStorage.getItem("token"),
         userInfo: JSON.parse(sessionStorage.getItem("userInfo")),
         focusMode: false,
     },

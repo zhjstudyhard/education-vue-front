@@ -254,7 +254,7 @@ export default {
         });
     },
     //文章分类跳转
-    categoryRoute(type) {
+    categoryRoute(name) {
       this.$router.push(`/category/${type}`);
     },
 

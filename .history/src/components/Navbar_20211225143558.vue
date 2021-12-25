@@ -46,7 +46,7 @@
         <el-dropdown-item
           v-for="(type, index) in types"
           :key="index"
-          @click.native="categoryRoute(type.dictionaryCode)"
+          @click.native="categoryRoute(type.dictionaryValue)"
           style="color: white"
         >
           {{ type.dictionaryValue }}
@@ -202,12 +202,10 @@ export default {
   },
   methods: {
     //用固话登出
-    logout() {
-      logout().then((response) => {
-        this.$store.commit("REMOVE_INFO");
-        //刷新页面
-        location.reload();
-      });
+    logout(){
+        logout().then(response =>{
+          this.$store.commit("REMOVE_INFO");
+        })
     },
     debounceQuery(queryString, callback) {
       this.timer && clearTimeout(this.timer);
@@ -253,9 +251,8 @@ export default {
           _this.msgError("请求失败");
         });
     },
-    //文章分类跳转
-    categoryRoute(type) {
-      this.$router.push(`/category/${type}`);
+    categoryRoute(name) {
+      this.$router.push(`/category/${name}`);
     },
 
     handleSelect(item) {

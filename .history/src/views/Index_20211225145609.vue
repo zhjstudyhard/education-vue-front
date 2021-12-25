@@ -230,7 +230,7 @@ export default {
   display: flex;
   margin-top: 10px;
   margin-bottom: 40px;
-  padding-top: 70px;
+  padding-top: 20px;
   margin-left: auto !important;
   margin-right: auto !important;
 

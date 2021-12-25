@@ -228,9 +228,9 @@ export default {
 
 .index-main {
   display: flex;
-  margin-top: 10px;
+  margin-top: 70px;
   margin-bottom: 40px;
-  padding-top: 70px;
+  padding-top: 20px;
   margin-left: auto !important;
   margin-right: auto !important;
 
@@ -242,7 +242,7 @@ export default {
   flex: 1;
   width: 1400px !important;
   min-height: 700px;
-  margin-left: 30px;
+
 }
 
 .index-main-column-left {

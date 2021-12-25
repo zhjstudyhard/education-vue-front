@@ -40,7 +40,7 @@ import { getArticleById } from "../api/article/article";
 import Comment from "@/components/Comment";
 
 export default {
-  // name: "查看文章",
+  name: "查看文章",
   components: { Comment },
   data() {
     return {

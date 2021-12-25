@@ -42,7 +42,7 @@
         :total="total"
         background
         layout="prev, pager, next"
-        @current-change="getData"
+        @current-change="getBlogByTypeName"
       >
       </el-pagination>
     </div>
@@ -109,8 +109,8 @@ export default {
 
   watch: {
     $route(to, from) {
-      this.type = this.$route.params.type;
-      this.getData(1);
+      this.categoryName = this.$route.params.name;
+      this.getBlogByTypeName(1);
     },
   },
   created() {

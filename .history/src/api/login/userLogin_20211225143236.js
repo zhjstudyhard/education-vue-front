@@ -10,7 +10,7 @@ import {get,post} from "../../axios";
 
 export const login =(data) => post(`/api/userLogin/login`,data);
 export const getUserInfo =() => post(`/api/permission/getUserInfo`);
-export const logout =() => post(`/api/userLogin/logout`);
+export const login =() => post(`/api/userLogin/logout`);
 // export function login(data) {
 //   return request({
 //     url: '/api/userLogin/login',

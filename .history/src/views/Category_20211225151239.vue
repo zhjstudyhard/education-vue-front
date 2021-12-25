@@ -15,8 +15,6 @@
             >{{ article.title }}
           </router-link>
         </h2>
-        <!-- <span style="font-size: small;color: blue">创建时间：{{ blog.createTime.split(' ')[0] }}  </span>
-        <span style="font-size: small;color: blue">  更新时间：{{ blog.updateTime.split(' ')[0] }}   </span> -->
         <span style="font-size: small; color: blue"
           >创建时间：{{ article.gmtCreate }}
         </span>
@@ -26,7 +24,6 @@
         <span style="font-size: small; color: blue">
           分类：{{ article.typeName }}</span
         >
-        <!-- <span style="font-size: small;color: blue">  字数：{{ blog.words }}</span> -->
       </div>
       <markdown-it-vue-light
         class="home-description-markdown-body"
@@ -34,6 +31,14 @@
         v-viewer="{ movable: false }"
       />
       <!--阅读全文按钮-->
+      <div class="div-btn">
+        <a
+          class="color-btn"
+          href="javascript:;"
+          @click.prevent="toArticle(article.id)"
+          >阅读全文</a
+        >
+      </div>
     </el-card>
     <div v-if="pageShow" class="home-page">
       <el-pagination
@@ -42,7 +47,7 @@
         :total="total"
         background
         layout="prev, pager, next"
-        @current-change="getData"
+        @current-change="getBlogByTypeName"
       >
       </el-pagination>
     </div>
@@ -50,7 +55,6 @@
 </template>
 
 <script>
-import { getArticlePage } from "../api/article/article";
 export default {
   name: "Category",
   data() {
@@ -61,61 +65,48 @@ export default {
       total: 0,
       pageSize: 5,
       pageShow: 0,
-      type: "",
+      categoryName: "",
     };
   },
 
   methods: {
-    getData(currentPage) {
-      let data = { currentPage: currentPage, type: this.type };
-      getArticlePage(data).then((response) => {
-        this.articles = response.data.data;
-        this.currentPage = response.data.current;
-        this.total = response.data.total;
-        this.pageSize = response.data.pageSize;
-        this.pageShow = 1;
-      });
+    getBlogByTypeName(currentPage) {
+      const _this = this;
+
+      this.$axios
+        .get(
+          "/blogsByType?currentPage=" +
+            currentPage +
+            "&typeName=" +
+            this.categoryName
+        )
+        .then((res) => {
+          _this.blogs = res.data.data.records;
+          _this.currentPage = res.data.data.current;
+          _this.total = res.data.data.total;
+          _this.pageSize = res.data.data.size;
+          _this.pageShow = 1;
+          console.log(_this.blogs);
+          var MardownIt = require("markdown-it");
+          var md = new MardownIt();
+
+          for (var i in _this.blogs) {
+            var result = md.render(_this.blogs[i].description);
+            _this.blogs[i].descriptionMd = result;
+          }
+        });
     },
-    // getBlogByTypeName(currentPage) {
-    //   const _this = this;
-
-    //   this.$axios
-    //     .get(
-    //       "/blogsByType?currentPage=" +
-    //         currentPage +
-    //         "&typeName=" +
-    //         this.categoryName
-    //     )
-    //     .then((res) => {
-    //       _this.blogs = res.data.data.records;
-    //       _this.currentPage = res.data.data.current;
-    //       _this.total = res.data.data.total;
-    //       _this.pageSize = res.data.data.size;
-    //       _this.pageShow = 1;
-    //       console.log(_this.blogs);
-    //       var MardownIt = require("markdown-it");
-    //       var md = new MardownIt();
-
-    //       for (var i in _this.blogs) {
-    //         var result = md.render(_this.blogs[i].description);
-    //         _this.blogs[i].descriptionMd = result;
-    //       }
-
-    //       //console.log(_this.blogList)
-    //       //console.log(_this.blogs)
-    //     });
-    // },
   },
 
   watch: {
     $route(to, from) {
-      this.type = this.$route.params.type;
-      this.getData(1);
+      this.categoryName = this.$route.params.name;
+      this.getBlogByTypeName(1);
     },
   },
   created() {
-    this.type = this.$route.params.type;
-    this.getData(1);
+    this.categoryName = this.$route.params.name;
+    this.getBlogByTypeName(1);
   },
 };
 </script>

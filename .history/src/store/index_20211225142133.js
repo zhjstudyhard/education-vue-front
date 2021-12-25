@@ -14,8 +14,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        // token: localStorage.getItem("token"),
-        token: sessionStorage.getItem("token"),
+        token: localStorage.getItem("token"),
         userInfo: JSON.parse(sessionStorage.getItem("userInfo")),
         focusMode: false,
     },
@@ -47,8 +46,7 @@ export default new Vuex.Store({
         REMOVE_INFO: (state) => {
             state.token = ""
             state.userInfo = {}
-            // localStorage.setItem("token", "")
-            sessionStorage.setItem("token", "")
+            localStorage.setItem("token", "")
             sessionStorage.setItem("userInfo", JSON.stringify(''))
         }
 

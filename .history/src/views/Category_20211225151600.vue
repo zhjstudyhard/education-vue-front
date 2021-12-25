@@ -42,7 +42,7 @@
         :total="total"
         background
         layout="prev, pager, next"
-        @current-change="getData"
+        @current-change="getBlogByTypeName"
       >
       </el-pagination>
     </div>
@@ -50,12 +50,11 @@
 </template>
 
 <script>
-import { getArticlePage } from "../api/article/article";
 export default {
   name: "Category",
   data() {
     return {
-      articles: [],
+     articles: [],
       types: [],
       currentPage: 1,
       total: 0,
@@ -66,56 +65,46 @@ export default {
   },
 
   methods: {
-    getData(currentPage) {
-      let data = { currentPage: currentPage, type: this.type };
-      getArticlePage(data).then((response) => {
-        this.articles = response.data.data;
-        this.currentPage = response.data.current;
-        this.total = response.data.total;
-        this.pageSize = response.data.pageSize;
-        this.pageShow = 1;
-      });
+    getBlogByTypeName(currentPage) {
+      const _this = this;
+
+      this.$axios
+        .get(
+          "/blogsByType?currentPage=" +
+            currentPage +
+            "&typeName=" +
+            this.categoryName
+        )
+        .then((res) => {
+          _this.blogs = res.data.data.records;
+          _this.currentPage = res.data.data.current;
+          _this.total = res.data.data.total;
+          _this.pageSize = res.data.data.size;
+          _this.pageShow = 1;
+          console.log(_this.blogs);
+          var MardownIt = require("markdown-it");
+          var md = new MardownIt();
+
+          for (var i in _this.blogs) {
+            var result = md.render(_this.blogs[i].description);
+            _this.blogs[i].descriptionMd = result;
+          }
+
+          //console.log(_this.blogList)
+          //console.log(_this.blogs)
+        });
     },
-    // getBlogByTypeName(currentPage) {
-    //   const _this = this;
-
-    //   this.$axios
-    //     .get(
-    //       "/blogsByType?currentPage=" +
-    //         currentPage +
-    //         "&typeName=" +
-    //         this.categoryName
-    //     )
-    //     .then((res) => {
-    //       _this.blogs = res.data.data.records;
-    //       _this.currentPage = res.data.data.current;
-    //       _this.total = res.data.data.total;
-    //       _this.pageSize = res.data.data.size;
-    //       _this.pageShow = 1;
-    //       console.log(_this.blogs);
-    //       var MardownIt = require("markdown-it");
-    //       var md = new MardownIt();
-
-    //       for (var i in _this.blogs) {
-    //         var result = md.render(_this.blogs[i].description);
-    //         _this.blogs[i].descriptionMd = result;
-    //       }
-
-    //       //console.log(_this.blogList)
-    //       //console.log(_this.blogs)
-    //     });
-    // },
   },
 
   watch: {
     $route(to, from) {
-      this.type = this.$route.params.type;
-      this.getData(1);
+      this.categoryName = this.$route.params.name;
+      this.getBlogByTypeName(1);
     },
   },
   created() {
     this.type = this.$route.params.type;
-    this.getData(1);
+    this.getBlogByTypeName(1);
   },
 };
 </script>
