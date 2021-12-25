@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-21 16:13:44
- * @LastEditTime: 2021-12-25 20:18:47
+ * @LastEditTime: 2021-12-25 20:01:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \blog-view\src\components\RightCard.vue
@@ -61,9 +61,6 @@
 </template>
 
 <script>
-import { MessageBox, Message } from "element-ui";
-import store from "../store";
-import router from "../router";
 export default {
   name: "RightCard",
   data() {
@@ -74,16 +71,20 @@ export default {
   methods: {
     writeArticle() {
       if (!sessionStorage.getItem("token")) {
-        MessageBox.confirm("请登录", "确认登陆", {
-          confirmButtonText: "重新登陆",
-          cancelButtonText: "取消",
-          type: "warning",
-        }).then(() => {
+        MessageBox.confirm(
+          "请登录",
+          "确认登陆",
+          {
+            confirmButtonText: "重新登陆",
+            cancelButtonText: "取消",
+            type: "warning",
+          }
+        ).then(() => {
           store.commit("REMOVE_INFO");
-          router.push({ path: "/login" });
+          router.push({
+            path: "/login",
+          });
         });
-      } else {
-        router.push({ path: "/writeArticle" });
       }
     },
     NewDate(str) {

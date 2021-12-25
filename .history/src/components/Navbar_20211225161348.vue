@@ -135,8 +135,10 @@
     <div class="right-menu" v-if="isShow">
       <el-dropdown
         style="
+          margin-top: 5px;
           position: relative;
           display: inline-block;
+          padding: 0 8px;
           height: 100%;
           font-size: 18px;
           color: #5a5e66;
@@ -158,13 +160,14 @@
               width: 40px;
               height: 40px;
               border-radius: 10px;
+              center
             "
           />
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu
           slot="dropdown"
-          style="background-color: #333333;"
+          style="background-color: #333333; padding: 20px"
         >
           <router-link to="/profile/index">
             <el-dropdown-item>个人信息</el-dropdown-item>

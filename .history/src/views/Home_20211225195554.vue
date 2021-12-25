@@ -1,6 +1,5 @@
 <template>
-  <div class="ui top segment" style="text-align: center">
-    <h2 class="m-text-500">分类 {{ type }} 下的文章</h2>
+  <div class="home-container">
     <el-card
       v-for="article in articles"
       :body-style="{ padding: '0px' }"
@@ -28,11 +27,20 @@
         >
         <!-- <span style="font-size: small;color: blue">  字数：{{ blog.words }}</span> -->
       </div>
+      <!-- <img :src=blog.firstPicture class="image " v-viewer="{movable: false}"> -->
+
+      <!--      <div class="home-description-markdown-body" v-html="blog.descriptionMd"  v-viewer="{movable: false}"></div>-->
       <markdown-it-vue-light
         class="home-description-markdown-body"
         :content="article.description"
         v-viewer="{ movable: false }"
       />
+      <!--阅读全文按钮-->
+      <div class="div-btn">
+        <a class="color-btn" href="javascript:;" @click.prevent="toArticle(article.id)"
+          >阅读全文</a
+        >
+      </div>
     </el-card>
     <div v-if="pageShow" class="home-page">
       <el-pagination
@@ -50,8 +58,9 @@
 
 <script>
 import { getArticlePage } from "../api/article/article";
+import {queryDictionaryAllPage} from "../api/dictionary/dictionary"
 export default {
-  name: "Category",
+  name: "Home",
   data() {
     return {
       articles: [],
@@ -60,44 +69,55 @@ export default {
       total: 0,
       pageSize: 5,
       pageShow: 0,
-      type: "",
     };
   },
-
   methods: {
+    //跳转到博客详情页
+    toArticle(id) {
+      this.$router.push(`/article/${id}`);
+    },
+    //分页获取博客
     getData(currentPage) {
-      let data = { currentPage: currentPage, type: this.type };
+      if (currentPage !== 1) {
+        $("#waypoint").hide();
+        $("#header-photo").hide();
+      } else {
+        $("#waypoint").show();
+        $("#header-photo").show();
+      }
+      let data = { currentPage: currentPage };
       getArticlePage(data).then((response) => {
+        // console.log("articels: ",response.data)
         this.articles = response.data.data;
         this.currentPage = response.data.current;
         this.total = response.data.total;
         this.pageSize = response.data.pageSize;
         this.pageShow = 1;
       });
-    },
-  },
-
-  watch: {
-    $route(to, from) {
-      this.type = this.$route.params.type;
-      this.getData(1);
+      //改变页号后返回顶部
+      this.scrollToTop();
     },
   },
   created() {
-    this.type = this.$route.params.type;
     this.getData(1);
   },
+
+  mounted() {},
+  watch: {},
 };
 </script>
+
 
 <style scoped>
 .home-container {
 }
 
-.home-description-markdown-body {
-  text-align: left;
+/*.home-description-markdown-body {*/
+/*  text-align: left;*/
+/*}*/
+home-description-markdown-body {
+  text-align: left !important;
 }
-
 .image {
   width: 100%;
   height: auto;
@@ -105,16 +125,22 @@ export default {
 
 .home-main-column-middle-card {
   background-color: white;
-  margin-bottom: 40px;
-
+  margin-bottom: 15px;
   padding: 20px 41px;
+}
+.home-title {
+  text-align: center;
+}
+.home-page {
   text-align: center;
 }
 
 .home-title {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
-
+.div-btn {
+  text-align: center;
+}
 .blog-link:link,
 .blog-link:visited {
   text-decoration: none;
@@ -129,5 +155,20 @@ export default {
 
 .home-page {
   text-align: center;
+}
+
+.color-btn {
+  text-decoration-line: none;
+  padding: 11px 20px;
+  color: white;
+  font-size: 13px;
+  background: linear-gradient(to right, #56ccf2, #2f80ed);
+  border-radius: 15px;
+  min-width: 90px;
+}
+
+.div-btn {
+  padding: 14px 5px 30px 5px;
+  margin-top: 7px;
 }
 </style>

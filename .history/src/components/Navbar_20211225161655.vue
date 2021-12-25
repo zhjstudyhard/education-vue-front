@@ -164,7 +164,7 @@
         </div>
         <el-dropdown-menu
           slot="dropdown"
-          style="background-color: #333333;"
+          style="background-color: #333333; padding: 20px"
         >
           <router-link to="/profile/index">
             <el-dropdown-item>个人信息</el-dropdown-item>

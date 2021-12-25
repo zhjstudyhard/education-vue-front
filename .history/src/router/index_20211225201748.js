@@ -98,7 +98,7 @@ const routes = [
     {
         path: '/writeArticle',
         name: 'writeArticle',
-        component: () => import('../views/article/ArticleEdit'),
+        component: () => import('../views/article/article'),
         meta: {
             title: '分类'
         }

@@ -135,8 +135,10 @@
     <div class="right-menu" v-if="isShow">
       <el-dropdown
         style="
+          margin-top: 5px;
           position: relative;
           display: inline-block;
+          padding: 0 8px;
           height: 100%;
           font-size: 18px;
           color: #5a5e66;
@@ -146,6 +148,7 @@
           &:hover {
             background: rgba(0, 0, 0, 0.025);
           }
+          center
         "
         trigger="click"
       >
@@ -164,7 +167,7 @@
         </div>
         <el-dropdown-menu
           slot="dropdown"
-          style="background-color: #333333;"
+          style="background-color: #333333; padding: 20px"
         >
           <router-link to="/profile/index">
             <el-dropdown-item>个人信息</el-dropdown-item>
@@ -385,6 +388,7 @@ export default {
   float: right;
   height: 100%;
   line-height: 50px;
+
   &:focus {
     outline: none;
   }
@@ -411,7 +415,7 @@ export default {
     margin-right: 30px;
 
     .avatar-wrapper {
-      /* margin-top: 5px; */
+      margin-top: 5px;
       position: relative;
 
       .user-avatar {
