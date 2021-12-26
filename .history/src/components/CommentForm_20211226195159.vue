@@ -110,12 +110,11 @@ export default {
     // },
     addComment() {
       if (this.commentForm.content == "") {
-        //  alert("你还未发表评论");
-        this.$message({
-          message: '你还未发表评论',
-          duration: 2 * 1000,
-          type:"warning",
-          offset: 100
+        Message({
+          message: "你还没有发表评论",
+          type: "error",
+          duration: 5 * 1000,
+          customClass: 'message-override'
         });
         // <el-alert title="你还没有发表评论" type="warning" show-icon></el-alert>;
       }
@@ -188,6 +187,9 @@ export default {
 </script>
 
 <style scoped>
+.message-override {
+  z-index: 10000;
+}
 .form h3 {
   margin: 5px;
   font-weight: 500 !important;

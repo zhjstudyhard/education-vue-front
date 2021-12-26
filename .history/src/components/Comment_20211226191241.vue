@@ -3,9 +3,9 @@
   <!--评论列表-->
   <div class="comment-body">
     <!--评论表单-->
-    <CommentForm v-if="parentId===-1" :realParentCommentId="-1" @parentEvent="toClick"></CommentForm>
-    <h3 class="ui-dividing-header">{{ commentCount }} 条评论</h3>
-    <h3 v-if="commentCount===0" class="ui-header">发表你的意见！</h3>
+    <CommentForm v-if="parentCommentId===-1" :realParentCommentId="-1" @parentEvent="toClick"></CommentForm>
+    <h3 class="ui-dividing-header">Comments | {{ commentCount }} 条评论</h3>
+    <h3 v-if="commentCount===0" class="ui-header">快来抢沙发！</h3>
     <!--评论内容-->
     <div v-for="comment in comments" :key="comment.id" class="comment">
       <!--父评论内容--用户名 头像 内容-->
@@ -43,12 +43,12 @@
             </div>
           </div>
           <!--评论表单-->
-          <CommentForm v-if="parentId===reply.id" :realParentCommentId="comment.id"
+          <CommentForm v-if="parentCommentId===reply.id" :realParentCommentId="comment.id"
                        :realParentCommentNickname="reply.nickname" @parentEvent="toClick"/>
         </div>
       </div>
       <!--评论表单-->
-      <CommentForm v-if="parentId===comment.id" :realParentCommentId="comment.id"
+      <CommentForm v-if="parentCommentId===comment.id" :realParentCommentId="comment.id"
                    :realParentCommentNickname="comment.nickname" @parentEvent="toClick"/>
     </div>
   </div>
@@ -63,23 +63,24 @@ export default {
     return {
       commentCount: 0,
       comments: [],
-      parentId: -1,
+      parentCommentId: -1,
       articleId: 0,
     }
   },
   methods: {
     //设置回复的父亲id
     setReply(id) {
-      this.parentId = id;
+      this.parentCommentId = id;
     },
     //设置回复的父亲id
     setChildrenReply(id) {
-      this.parentId = id;
+      this.parentCommentId = id;
+
     },
     //接受子组件信息，将评论表单归位
     toClick(msg) {
       //console.log(msg)
-      this.parentId = -1
+      this.parentCommentId = -1
     },
     //获取评论
     getComments() {
@@ -93,11 +94,12 @@ export default {
         // alert("error")
         return false
       }
+      const _this = this
       this.$axios.get('/comment/' + this.blogId).then(res => {
-        this.comments = res.data.data
-        this.commentCount = this.comments.length
-        for (var i in this.comments) {
-          this.commentCount = this.commentCount + this.comments[i].replyComments.length;
+        _this.comments = res.data.data
+        _this.commentCount = _this.comments.length
+        for (var i in _this.comments) {
+          _this.commentCount = _this.commentCount + _this.comments[i].replyComments.length;
         }
       })
     },

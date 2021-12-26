@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { MessageBox, Message } from "element-ui";
 export default {
   name: "CommentForm",
   props: {
@@ -108,20 +107,13 @@ export default {
     //     //console.log(JSON.stringify(this.commentForm))
     //   }
     // },
-    addComment() {
-      if (this.commentForm.content == "") {
-        //  alert("你还未发表评论");
-        this.$message({
-          message: '你还未发表评论',
-          duration: 2 * 1000,
-          type:"warning",
-          offset: 100
-        });
-        // <el-alert title="你还没有发表评论" type="warning" show-icon></el-alert>;
+    addComment(){
+        if (this.commentForm.content == "") {
+        <el-alert title="你还没有发表评论" type="warning" show-icon></el-alert>;
       }
-    },
+    }
     // beforePost() {
-
+      
     // },
 
     //提交评论

@@ -27,10 +27,12 @@
       <el-row :gutter="20">
         <el-col :span="5">
           <el-form-item>
-            <!-- v-throttle="[postForm, `click`, 30000]" -->
-            <!-- @mouseenter.native="beforePost" -->
             <!-- 接口节流  -->
-            <el-button size="medium" type="primary" @click="addComment"
+            <el-button
+              size="medium"
+              type="primary"
+              v-throttle="[postForm, `click`, 30000]"
+              @mouseenter.native="beforePost"
               >发表评论</el-button
             >
           </el-form-item>
@@ -41,7 +43,6 @@
 </template>
 
 <script>
-import { MessageBox, Message } from "element-ui";
 export default {
   name: "CommentForm",
   props: {
@@ -108,21 +109,12 @@ export default {
     //     //console.log(JSON.stringify(this.commentForm))
     //   }
     // },
-    addComment() {
+    //提交之前检查头像地址是否为空
+    beforePost() {
       if (this.commentForm.content == "") {
-        //  alert("你还未发表评论");
-        this.$message({
-          message: '你还未发表评论',
-          duration: 2 * 1000,
-          type:"warning",
-          offset: 100
-        });
-        // <el-alert title="你还没有发表评论" type="warning" show-icon></el-alert>;
+        <el-alert title="请输入评论内容" type="warning" show-icon></el-alert>;
       }
     },
-    // beforePost() {
-
-    // },
 
     //提交评论
     postForm() {

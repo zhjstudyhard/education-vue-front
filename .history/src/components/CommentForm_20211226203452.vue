@@ -113,8 +113,7 @@ export default {
         //  alert("你还未发表评论");
         this.$message({
           message: '你还未发表评论',
-          duration: 2 * 1000,
-          type:"warning",
+          duration: 1 * 1000,
           offset: 100
         });
         // <el-alert title="你还没有发表评论" type="warning" show-icon></el-alert>;

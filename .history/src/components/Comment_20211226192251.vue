@@ -4,8 +4,8 @@
   <div class="comment-body">
     <!--评论表单-->
     <CommentForm v-if="parentId===-1" :realParentCommentId="-1" @parentEvent="toClick"></CommentForm>
-    <h3 class="ui-dividing-header">{{ commentCount }} 条评论</h3>
-    <h3 v-if="commentCount===0" class="ui-header">发表你的意见！</h3>
+    <h3 class="ui-dividing-header">Comments | {{ commentCount }} 条评论</h3>
+    <h3 v-if="commentCount===0" class="ui-header">发表你的意见</h3>！</h3>
     <!--评论内容-->
     <div v-for="comment in comments" :key="comment.id" class="comment">
       <!--父评论内容--用户名 头像 内容-->

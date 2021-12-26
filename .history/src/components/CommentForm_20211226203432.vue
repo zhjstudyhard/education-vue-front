@@ -112,9 +112,8 @@ export default {
       if (this.commentForm.content == "") {
         //  alert("你还未发表评论");
         this.$message({
-          message: '你还未发表评论',
-          duration: 2 * 1000,
-          type:"warning",
+          message: '这是一条消息提示',
+          duration: 1 * 1000,
           offset: 100
         });
         // <el-alert title="你还没有发表评论" type="warning" show-icon></el-alert>;

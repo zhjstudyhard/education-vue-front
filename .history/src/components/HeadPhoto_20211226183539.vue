@@ -225,7 +225,7 @@ export default {
   position: absolute;
   top: -6px;
   left: -6px;
-  /* border: 3px solid white; */
+  border: 3px solid white;
   box-sizing: border-box;
   animation: clipMe 5s linear infinite;
 }
@@ -236,7 +236,7 @@ export default {
   width: 800px;
   height: 100px;
   line-height: 100px;
-  box-shadow: inset 0 0 0 1px white;
+  /* box-shadow: inset 0 0 0 1px white; */
   margin: 40px auto;
   margin-top: 80px;
   color: white;
