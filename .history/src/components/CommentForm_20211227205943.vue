@@ -27,6 +27,9 @@
       <el-row :gutter="20">
         <el-col :span="5">
           <el-form-item>
+            <!-- v-throttle="[postForm, `click`, 30000]" -->
+            <!-- @mouseenter.native="beforePost" -->
+            <!-- 接口节流  -->
             <el-button size="medium" type="primary" @click="addComment"
               >发表评论</el-button
             >
@@ -84,6 +87,28 @@ export default {
       //console.log("取消")
       this.commentForm.parentCommentId = -1;
     },
+    // //失去焦点 自动获取qq昵称和头像 或者非qq设置随机头像
+    // onInputBlur() {
+    //   //判断是否是qq号码
+    //   const _this = this
+    //   var qq = this.commentForm.nickname
+    //   if (!isNaN(Number(qq)) && qq.length > 4 && qq.length < 12) {
+    //     this.$axios.get('https://api.usuuu.com/qq/' + qq).then(res => {
+    //       if (res.data) {
+    //         _this.commentForm.nickname = res.data.data.name
+    //         _this.commentForm.avatar = res.data.data.avatar
+    //         _this.commentForm.qq = res.data.data.qq
+    //         //console.log(JSON.stringify(_this.commentForm))
+    //         //console.log("哈哈哈哈哈")
+    //       }
+    //     })
+    //   } else {
+    //     //根据昵称随机头像
+    //     var randomNum = this.hashFunc(this.commentForm.nickname, 20)
+    //     this.commentForm.avatar = "https://cdn.jsdelivr.net/gh/yubifeng/blog-resource/bloghosting/2021/avatar/avatar" + randomNum + ".webp"
+    //     //console.log(JSON.stringify(this.commentForm))
+    //   }
+    // },
     //添加评论
     addComment() {
       if (!sessionStorage.getItem("token")) {
@@ -115,8 +140,44 @@ export default {
         this.$message({
           type: "success",
           message: "评论成功!",
-          offset: 130,
+          offset: 100,
         });
+      });
+    },
+    // beforePost() {
+
+    // },
+
+    //提交评论
+    postForm() {
+      //console.log(JSON.stringify(this.commentForm))
+      //表单校验
+      this.$refs.formRef.validate((valid) => {
+        if (valid) {
+          console.log(JSON.stringify(this.commentForm));
+          //判断是否为管理员(博主)
+          if (this.commentForm.isAdminComment == 1) {
+            this.commentForm.avatar =
+              "https://cdn.jsdelivr.net/gh/yubifeng/blog-resource/bloghosting//website/static/websiteAvatar.webp";
+          }
+          const _this = this;
+          this.$axios.post("/comment/add", this.commentForm).then((res) => {
+            //console.log(res)
+            if (res.data.code == 200) {
+              _this.$alert("发送成功", "提示", {
+                confirmButtonText: "确定",
+                callback: (action) => {
+                  //_this.$router.push("/blog/")
+                  location.reload();
+                },
+              });
+            } else {
+            }
+          });
+        } else {
+          alert("输入数据不合法，请检查");
+          return false;
+        }
       });
     },
   },

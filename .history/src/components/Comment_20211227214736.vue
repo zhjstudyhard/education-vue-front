@@ -17,11 +17,10 @@
         <img :src="comment.avatar" style="width: 40px; border-radius: 50%" />
       </div>
       <div class="content">
-        {{ comment.username }}
         <!-- <a :href="comment.website!=''&&comment.website!=null?comment.website:null" class="nickname" rel="external nofollow noopener"
            target="_blank">{{ comment.nickname }}</a> -->
         <el-tag
-          v-if="comment.articleUser == 1"
+          v-if="comment.isAdminComment == 1"
           class="label"
           effect="dark"
           size="mini"
@@ -41,11 +40,11 @@
           :key="reply.id"
           class="comment"
         > -->
-      <!-- <span :id="`comment-${reply.id}`" class="anchor"></span>
+          <!-- <span :id="`comment-${reply.id}`" class="anchor"></span>
           <div class="image-avatar">
             <img :src="reply.avatar" style="width: 40px; border-radius: 50%" />
           </div> -->
-      <!-- <div class="content">
+          <!-- <div class="content">
             <a
               :href="
                 reply.website != '' && reply.website != null
@@ -57,7 +56,7 @@
               target="_blank"
               >{{ reply.nickname }}</a
             > -->
-      <!-- <el-tag
+            <!-- <el-tag
               v-if="reply.isAdminComment == 1"
               class="label"
               effect="dark"
@@ -65,9 +64,9 @@
               type="info"
               >博主</el-tag
             > -->
-      <!-- <span class="date">{{ reply.createTime }}</span> -->
-      <!-- <div class="text"> -->
-      <!-- <a
+            <!-- <span class="date">{{ reply.createTime }}</span> -->
+            <!-- <div class="text"> -->
+              <!-- <a
                 :href="`#comment-${comment.id}`"
                 style="
                   text-decoration-line: none;
@@ -77,9 +76,9 @@
                 "
                 >@{{ reply.parentCommentNickname }}</a
               > -->
-      <!-- <div style="display: inline" v-html="reply.content"></div> -->
-      <!-- </div> -->
-      <!-- <div class="actions">
+              <!-- <div style="display: inline" v-html="reply.content"></div> -->
+            <!-- </div> -->
+            <!-- <div class="actions">
               <el-button
                 size="mini"
                 type="primary"
@@ -87,15 +86,15 @@
                 >回复</el-button
               >
             </div> -->
-      <!-- </div> -->
-      <!--评论表单-->
-      <!-- <CommentForm
+          <!-- </div> -->
+          <!--评论表单-->
+          <!-- <CommentForm
             v-if="parentId === reply.id"
             :realParentCommentId="comment.id"
             :realParentCommentNickname="reply.nickname"
             @parentEvent="toClick"
           /> -->
-      <!-- </div> -->
+        <!-- </div> -->
       <!-- </div> -->
       <!--评论表单-->
       <!-- <CommentForm
@@ -110,7 +109,6 @@
 
 <script>
 import CommentForm from "@/components/CommentForm";
-import { queryComment } from "@/api/article/comment";
 export default {
   name: "Comment",
   components: { CommentForm },
@@ -119,7 +117,7 @@ export default {
       commentCount: 0,
       comments: [],
       parentId: -1,
-      articleId: "",
+      articleId: 0,
     };
   },
   methods: {
@@ -138,22 +136,24 @@ export default {
     },
     //获取评论
     getComments() {
-      if (this.$route.params.id) {
-        this.articleId = this.$route.params.id;
+      if (this.$route.params.blogId) {
+        this.blogId = this.$route.params.blogId;
+      } else if (this.$route.path == "/about") {
+        this.blogId = 1;
+      } else if (this.$route.path == "/friends") {
+        this.blogId = 2;
+      } else {
+        // alert("error")
+        return false;
       }
-      let data = { articleId: this.articleId };
-      queryComment(data).then((response) => {
-        this.comments = response.data.data;
+      this.$axios.get("/comment/" + this.blogId).then((res) => {
+        this.comments = res.data.data;
         this.commentCount = this.comments.length;
+        for (var i in this.comments) {
+          this.commentCount =
+            this.commentCount + this.comments[i].replyComments.length;
+        }
       });
-      // this.$axios.get("/comment/" + this.blogId).then((res) => {
-      //   this.comments = res.data.data;
-      //   this.commentCount = this.comments.length;
-      //   // for (var i in this.comments) {
-      //   //   this.commentCount =
-      //   //     this.commentCount + this.comments[i].replyComments.length;
-      //   // }
-      // });
     },
   },
   created() {

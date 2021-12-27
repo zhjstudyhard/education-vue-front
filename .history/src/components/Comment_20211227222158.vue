@@ -20,14 +20,14 @@
         {{ comment.username }}
         <!-- <a :href="comment.website!=''&&comment.website!=null?comment.website:null" class="nickname" rel="external nofollow noopener"
            target="_blank">{{ comment.nickname }}</a> -->
-        <el-tag
-          v-if="comment.articleUser == 1"
+        <!-- <el-tag
+          v-if="comment.isAdminComment == 1"
           class="label"
           effect="dark"
           size="mini"
           type="info"
           >博主</el-tag
-        >
+        > -->
         <span class="date">{{ comment.gmtCreate }}</span>
         <el-button size="mini" type="primary" @click="setReply(comment.id)"
           >回复</el-button

@@ -119,6 +119,38 @@ export default {
         });
       });
     },
+    //提交评论
+    // postForm() {
+    //   //console.log(JSON.stringify(this.commentForm))
+    //   //表单校验
+    //   this.$refs.formRef.validate((valid) => {
+    //     if (valid) {
+    //       console.log(JSON.stringify(this.commentForm));
+    //       //判断是否为管理员(博主)
+    //       if (this.commentForm.isAdminComment == 1) {
+    //         this.commentForm.avatar =
+    //           "https://cdn.jsdelivr.net/gh/yubifeng/blog-resource/bloghosting//website/static/websiteAvatar.webp";
+    //       }
+    //       const _this = this;
+    //       this.$axios.post("/comment/add", this.commentForm).then((res) => {
+    //         //console.log(res)
+    //         if (res.data.code == 200) {
+    //           _this.$alert("发送成功", "提示", {
+    //             confirmButtonText: "确定",
+    //             callback: (action) => {
+    //               //_this.$router.push("/blog/")
+    //               location.reload();
+    //             },
+    //           });
+    //         } else {
+    //         }
+    //       });
+    //     } else {
+    //       alert("输入数据不合法，请检查");
+    //       return false;
+    //     }
+    //   });
+    // },
   },
   watch: {
     //监控props 但是好像没用额， 因为为在父类中没改动
