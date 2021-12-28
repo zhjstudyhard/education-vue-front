@@ -46,19 +46,27 @@
             <img :src="reply.avatar" style="width: 40px; border-radius: 50%" />
           </div>
           <div class="content">
-            {{ reply.username }}
+            {{ comment.username }}
             <el-tag
-              v-if="reply.articleUser == 1"
+              v-if="reply.isAdminComment == 1"
               class="label"
               effect="dark"
               size="mini"
               type="info"
               >博主</el-tag
             >
-            <span class="date">{{ reply.gmtCreate }}</span>
+            <span class="date">{{ reply.createTime }}</span>
             <div class="text">
-              <a :href="`#`"
-                 style="text-decoration-line: none;margin-right: 8px;font-weight: bold;color: #333333">@{{ reply.applyParentName }}</a>
+              <a
+                :href="`#comment-${comment.id}`"
+                style="
+                  text-decoration-line: none;
+                  margin-right: 8px;
+                  font-weight: bold;
+                  color: #333333;
+                "
+                >@{{ reply.parentCommentNickname }}</a
+              >
               <div style="display: inline" v-html="reply.content"></div>
             </div>
             <div class="actions">
@@ -73,8 +81,8 @@
           <!--评论表单-->
           <CommentForm
             v-if="parentId === reply.id"
-            :realParentCommentId="reply.id"
-            :firstParentCommentId="comment.id"
+            :realParentCommentId="comment.id"
+            :realParentCommentNickname="reply.nickname"
             @parentEvent="toClick"
           />
         </div>

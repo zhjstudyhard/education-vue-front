@@ -57,8 +57,6 @@
             >
             <span class="date">{{ reply.gmtCreate }}</span>
             <div class="text">
-              <a :href="`#`"
-                 style="text-decoration-line: none;margin-right: 8px;font-weight: bold;color: #333333">@{{ reply.applyParentName }}</a>
               <div style="display: inline" v-html="reply.content"></div>
             </div>
             <div class="actions">

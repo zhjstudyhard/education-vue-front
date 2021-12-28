@@ -41,42 +41,60 @@
           :key="reply.id"
           class="comment"
         >
-          <span :id="`comment-${reply.id}`" class="anchor"></span>
+          <!-- <span :id="`comment-${reply.id}`" class="anchor"></span>
           <div class="image-avatar">
             <img :src="reply.avatar" style="width: 40px; border-radius: 50%" />
-          </div>
-          <div class="content">
-            {{ reply.username }}
-            <el-tag
-              v-if="reply.articleUser == 1"
+          </div> -->
+          <!-- <div class="content">
+            <a
+              :href="
+                reply.website != '' && reply.website != null
+                  ? reply.website
+                  : null
+              "
+              class="nickname"
+              rel="external nofollow noopener"
+              target="_blank"
+              >{{ reply.nickname }}</a
+            > -->
+          <!-- <el-tag
+              v-if="reply.isAdminComment == 1"
               class="label"
               effect="dark"
               size="mini"
               type="info"
               >博主</el-tag
-            >
-            <span class="date">{{ reply.gmtCreate }}</span>
-            <div class="text">
-              <a :href="`#`"
-                 style="text-decoration-line: none;margin-right: 8px;font-weight: bold;color: #333333">@{{ reply.applyParentName }}</a>
-              <div style="display: inline" v-html="reply.content"></div>
-            </div>
-            <div class="actions">
+            > -->
+          <!-- <span class="date">{{ reply.createTime }}</span> -->
+          <!-- <div class="text"> -->
+          <!-- <a
+                :href="`#comment-${comment.id}`"
+                style="
+                  text-decoration-line: none;
+                  margin-right: 8px;
+                  font-weight: bold;
+                  color: #333333;
+                "
+                >@{{ reply.parentCommentNickname }}</a
+              > -->
+          <!-- <div style="display: inline" v-html="reply.content"></div> -->
+          <!-- </div> -->
+          <!-- <div class="actions">
               <el-button
                 size="mini"
                 type="primary"
                 @click="setChildrenReply(reply.id)"
                 >回复</el-button
               >
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
           <!--评论表单-->
-          <CommentForm
+          <!-- <CommentForm
             v-if="parentId === reply.id"
-            :realParentCommentId="reply.id"
-            :firstParentCommentId="comment.id"
+            :realParentCommentId="comment.id"
+            :realParentCommentNickname="reply.nickname"
             @parentEvent="toClick"
-          />
+          /> -->
         </div>
       </div>
       <!--评论表单-->

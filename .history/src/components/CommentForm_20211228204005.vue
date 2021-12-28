@@ -45,11 +45,8 @@ export default {
   name: "CommentForm",
   props: {
     realParentCommentId: {
-      // type: String,
+      type: Number,
       default: "-1",
-    },
-    firstParentCommentId: {
-      default: "",
     },
   },
   data() {
@@ -58,7 +55,6 @@ export default {
         content: "",
         articleId: null,
         parentId: this.realParentCommentId,
-        firstParentId: this.firstParentCommentId,
       },
     };
   },

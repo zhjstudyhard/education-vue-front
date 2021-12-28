@@ -12,7 +12,7 @@
         >取消回复
       </el-button>
     </h3>
-    <el-form ref="formRef" :model="commentForm" size="small">
+    <el-form ref="formRef" :model="commentForm"  size="small">
       <el-input
         v-model="commentForm.content"
         :class="'textarea'"
@@ -45,10 +45,11 @@ export default {
   name: "CommentForm",
   props: {
     realParentCommentId: {
-      // type: String,
+      type: Number,
       default: "-1",
     },
-    firstParentCommentId: {
+    realParentCommentNickname: {
+      type: String,
       default: "",
     },
   },
@@ -58,7 +59,8 @@ export default {
         content: "",
         articleId: null,
         parentId: this.realParentCommentId,
-        firstParentId: this.firstParentCommentId,
+        // isAdminComment: -1,
+        // parentCommentNickname: this.realParentCommentNickname
       },
     };
   },
@@ -98,7 +100,7 @@ export default {
         });
         return false;
       }
-
+      
       if (this.commentForm.content == "") {
         //  alert("你还未发表评论");
         this.$message({
@@ -116,7 +118,6 @@ export default {
           message: "评论成功!",
           offset: 130,
         });
-        location.reload();
       });
     },
   },
@@ -130,6 +131,21 @@ export default {
   created() {
     if (this.$route.params.id) {
       this.commentForm.articleId = this.$route.params.id;
+    } else if (this.$route.path == "/about") {
+      this.commentForm.blogId = 1;
+    } else if (this.$route.path == "/friends") {
+      this.commentForm.blogId = 11;
+    } else {
+      // alert("error")
+      return false;
+    }
+    if (this.$store.getters.getUser) {
+      if (
+        this.$store.getters.getUser.role === "role_admin" ||
+        this.$store.getters.getUser.role === "role_root"
+      ) {
+        this.commentForm.isAdminComment = 1;
+      }
     }
   },
 };

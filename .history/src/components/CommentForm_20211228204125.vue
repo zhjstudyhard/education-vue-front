@@ -48,9 +48,6 @@ export default {
       // type: String,
       default: "-1",
     },
-    firstParentCommentId: {
-      default: "",
-    },
   },
   data() {
     return {
@@ -58,7 +55,6 @@ export default {
         content: "",
         articleId: null,
         parentId: this.realParentCommentId,
-        firstParentId: this.firstParentCommentId,
       },
     };
   },

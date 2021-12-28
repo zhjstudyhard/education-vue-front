@@ -58,7 +58,7 @@ export default {
         content: "",
         articleId: null,
         parentId: this.realParentCommentId,
-        firstParentId: this.firstParentCommentId,
+        firstParentCommentId: this.firstParentCommentId,
       },
     };
   },
@@ -116,7 +116,7 @@ export default {
           message: "评论成功!",
           offset: 130,
         });
-        location.reload();
+        // location.reload();
       });
     },
   },

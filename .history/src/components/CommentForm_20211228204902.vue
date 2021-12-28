@@ -58,7 +58,7 @@ export default {
         content: "",
         articleId: null,
         parentId: this.realParentCommentId,
-        firstParentId: this.firstParentCommentId,
+        firstParentCommentId: this.firstParentCommentId,
       },
     };
   },

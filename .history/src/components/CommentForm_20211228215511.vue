@@ -116,7 +116,7 @@ export default {
           message: "评论成功!",
           offset: 130,
         });
-        location.reload();
+        // location.reload();
       });
     },
   },
