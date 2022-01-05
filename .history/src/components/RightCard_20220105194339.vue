@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-21 16:13:44
- * @LastEditTime: 2022-01-05 20:21:11
+ * @LastEditTime: 2022-01-05 19:43:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \blog-view\src\components\RightCard.vue
@@ -27,37 +27,6 @@
     <div class="card">
       <p style="margin-top: 0px">文章热议</p>
       <el-divider></el-divider>
-      <div class="home-container">
-        <el-card
-          v-for="article in articles"
-          :body-style="{ padding: '0px' }"
-          class="home-main-column-middle-card"
-          :key="article.id"
-        >
-          <div class="home-title">
-            <h2>
-              <router-link
-                :to="{ name: 'article', params: { id: article.id } }"
-                class="blog-link"
-                >{{ article.title }}
-              </router-link>
-            </h2>
-            <!-- <span style="font-size: small;color: blue">创建时间：{{ blog.createTime.split(' ')[0] }}  </span>
-        <span style="font-size: small;color: blue">  更新时间：{{ blog.updateTime.split(' ')[0] }}   </span> -->
-            <span style="font-size: small; color: blue"
-              >创建时间：{{ article.gmtCreate }}
-            </span>
-            <span style="font-size: small; color: blue">
-              更新时间：{{ article.gmtModified }}
-            </span>
-            <span style="font-size: small; color: blue">
-              分类：{{ article.typeName }}</span
-            >
-            <!-- <span style="font-size: small;color: blue">  字数：{{ blog.words }}</span> -->
-          </div>
-        </el-card>
-      </div>
-
       <!-- <p style="margin-top: 0px">Welcome to 橘白 Blog</p>
       <div>
         <p
@@ -93,7 +62,7 @@
 
 <script>
 import { MessageBox, Message } from "element-ui";
-import { queryCacheArticle } from "../api/article/article";
+import { zsetArticle } from "../api/article/article";
 import store from "../store";
 import router from "../router";
 export default {
@@ -101,7 +70,6 @@ export default {
   data() {
     return {
       runTime: 0,
-       articles: [],
     };
   },
   methods: {
@@ -149,9 +117,8 @@ export default {
     //查询文章热议
     getData() {
       let data = {};
-      queryCacheArticle(data).then((response) => {
-        this.articles = response.data
-        // console.log("redis: ", response.data);
+      zsetArticle(data).then((response) => {
+        console.log("redis: ", response);
       });
     },
   },
