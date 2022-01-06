@@ -36,10 +36,7 @@
           padding: 20px;
         "
       >
-        分类<i
-          class="el-icon-arrow-down el-icon--right"
-          style="padding-top: 0"
-        ></i>
+        分类<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
 
       <el-dropdown-menu
@@ -136,30 +133,22 @@
       注册
     </router-link>
     <div class="right-menu" v-if="isShow">
-      <!-- <el-container v-if="isShow"> -->
+    <!-- <el-container v-if="isShow"> -->
       <el-header>
         <div class="header-avatar">
           <el-avatar size="medium" :src="avatar"></el-avatar>
 
           <el-dropdown>
-            <span class="el-dropdown-link" style="color: white">
+            <span class="el-dropdown-link">
               <!-- {{ userInfo.username}} -->
               赵浩杰
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <router-link to="/profile/index">基本设置</router-link>
+                <router-link to="/profile/index">个人中心</router-link>
               </el-dropdown-item>
-              <el-dropdown-item>
-                <router-link to="/profile/index">我的消息</router-link>
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <router-link to="/profile/index">我的主页</router-link>
-              </el-dropdown-item>
-              <el-dropdown-item @click.native="logout"
-                >退出登录</el-dropdown-item
-              >
+              <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -207,7 +196,7 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown> -->
-      <!-- </el-container> -->
+    <!-- </el-container> -->
     </div>
   </div>
 </template>
@@ -338,8 +327,7 @@ export default {
   margin: 20px 0 0 0 !important;
   padding: 0 !important;
   border: 0 !important;
-  /* background: #1b1c1d !important; */
-  background: white;
+  background: #1b1c1d !important;
 }
 
 .el-dropdown-menu__item {
@@ -358,6 +346,7 @@ export default {
   height: 50px;
   padding-top: 20px;
   background-color: #333333;
+
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -413,12 +402,10 @@ export default {
   right: 200px;
 }
 .right-menu {
-  float: right;
+  padding: 0;
+  margin-top: 10px;
   height: 100%;
-  line-height: 40px;
-  padding: 0px;
-  /* height: 100%; */
-  /* background: white; */
+  background: white;
 }
 .header-avatar {
   float: right;

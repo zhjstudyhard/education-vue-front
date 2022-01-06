@@ -34,12 +34,10 @@
           color: white;
           font-size: 16px;
           padding: 20px;
+          display: flex;
         "
       >
-        分类<i
-          class="el-icon-arrow-down el-icon--right"
-          style="padding-top: 0"
-        ></i>
+        分类<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
 
       <el-dropdown-menu
@@ -136,7 +134,7 @@
       注册
     </router-link>
     <div class="right-menu" v-if="isShow">
-      <!-- <el-container v-if="isShow"> -->
+    <!-- <el-container v-if="isShow"> -->
       <el-header>
         <div class="header-avatar">
           <el-avatar size="medium" :src="avatar"></el-avatar>
@@ -149,17 +147,9 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <router-link to="/profile/index">基本设置</router-link>
+                <router-link to="/profile/index">个人中心</router-link>
               </el-dropdown-item>
-              <el-dropdown-item>
-                <router-link to="/profile/index">我的消息</router-link>
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <router-link to="/profile/index">我的主页</router-link>
-              </el-dropdown-item>
-              <el-dropdown-item @click.native="logout"
-                >退出登录</el-dropdown-item
-              >
+              <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -207,7 +197,7 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown> -->
-      <!-- </el-container> -->
+    <!-- </el-container> -->
     </div>
   </div>
 </template>
@@ -358,6 +348,7 @@ export default {
   height: 50px;
   padding-top: 20px;
   background-color: #333333;
+
   margin-left: auto !important;
   margin-right: auto !important;
 }

@@ -154,9 +154,9 @@
               <el-dropdown-item>
                 <router-link to="/profile/index">我的消息</router-link>
               </el-dropdown-item>
-              <el-dropdown-item>
+              <!-- <el-dropdown-item>
                 <router-link to="/profile/index">我的主页</router-link>
-              </el-dropdown-item>
+              </el-dropdown-item> -->
               <el-dropdown-item @click.native="logout"
                 >退出登录</el-dropdown-item
               >

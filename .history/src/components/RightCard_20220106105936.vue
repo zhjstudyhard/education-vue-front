@@ -169,7 +169,7 @@ export default {
 .card {
   width: 250px;
   /* height: 300px; */
-  height: 200px;
+  height: 250px;
   padding: 20px 0px 0px 0px;
   background-color: white;
   text-align: center;

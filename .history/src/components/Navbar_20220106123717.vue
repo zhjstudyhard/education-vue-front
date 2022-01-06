@@ -36,10 +36,7 @@
           padding: 20px;
         "
       >
-        分类<i
-          class="el-icon-arrow-down el-icon--right"
-          style="padding-top: 0"
-        ></i>
+        分类<i class="el-icon-arrow-down el-icon--right" style="padding-top:0"></i>
       </span>
 
       <el-dropdown-menu
@@ -83,7 +80,7 @@
     <router-link
       :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
       class="item"
-      style="text-decoration-line: none; color: white; padding: 20px"
+      style="text-decoration-line: none; color: white; padding: 20px;"
       to="/about"
     >
       关于我
@@ -136,7 +133,7 @@
       注册
     </router-link>
     <div class="right-menu" v-if="isShow">
-      <!-- <el-container v-if="isShow"> -->
+    <!-- <el-container v-if="isShow"> -->
       <el-header>
         <div class="header-avatar">
           <el-avatar size="medium" :src="avatar"></el-avatar>
@@ -149,17 +146,9 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <router-link to="/profile/index">基本设置</router-link>
+                <router-link to="/profile/index">个人中心</router-link>
               </el-dropdown-item>
-              <el-dropdown-item>
-                <router-link to="/profile/index">我的消息</router-link>
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <router-link to="/profile/index">我的主页</router-link>
-              </el-dropdown-item>
-              <el-dropdown-item @click.native="logout"
-                >退出登录</el-dropdown-item
-              >
+              <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -207,7 +196,7 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown> -->
-      <!-- </el-container> -->
+    <!-- </el-container> -->
     </div>
   </div>
 </template>
@@ -356,10 +345,11 @@ export default {
 
 .blog-navbar {
   height: 50px;
-  padding-top: 20px;
+  padding-top: 30px;
   background-color: #333333;
   margin-left: auto !important;
   margin-right: auto !important;
+  line-height: 0px;
 }
 
 .m-search {

@@ -102,15 +102,20 @@ const routes = [{
         }
     },
     {
-
-        path: '/profile/index',
-        component: () => import('../components/profile/index'),
-        name: 'Profile',
-        meta: {
-            title: 'Profile',
-            icon: 'user',
-            noCache: true
-        }
+        path: '/profile',
+        // component: Layout,
+        redirect: '/profile/index',
+        hidden: true,
+        children: [{
+            path: 'index',
+            component: () => import('../components/profile/index'),
+            name: 'Profile',
+            meta: {
+                title: 'Profile',
+                icon: 'user',
+                noCache: true
+            }
+        }]
     }
 ];
 
