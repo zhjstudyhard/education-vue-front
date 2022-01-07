@@ -190,8 +190,8 @@ export default {
         if (valid) {
           // passForm.password = encrypt(user.password);
           let data = {
-            oldPassword: encrypt(this.passForm.oldPassword.trim()),
-            newPassword: encrypt(this.passForm.newPassword),
+            oldPassword: encrypt(passForm.oldPassword.trim()),
+            newPassword: encrypt(passForm.newPassword),
           };
           updatePassword(data).then((response) => {
             this.$alert("修改成功", "提示", {

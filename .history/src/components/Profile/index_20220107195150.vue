@@ -8,8 +8,6 @@
 -->
 <template>
   <div class="app-container">
-     <!--顶部导航栏-->
-    <Navbar class = "navbar"  id="nav" v-show="$route.name!=='Home'||this.focusMode"></Navbar>
     <div v-if="user">
       <el-row :gutter="20">
         <el-col :span="6" :xs="24">

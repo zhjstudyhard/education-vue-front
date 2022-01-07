@@ -120,7 +120,7 @@
 </template>
 <script>
 import { queryDictionaryAllPage,queryDictionaryByType } from "../../api/dictionary/dictionary";
-import { getArticleById,addArticle,updateArticle } from "../../api/article/article";
+import { getArticleById,addArticle } from "../../api/article/article";
 export default {
   // name: "BlogEdit",
   data() {
@@ -167,7 +167,7 @@ export default {
       if (this.$route.params && this.$route.params.id) {
         let data = { id: this.$route.params.id };
         getArticleById(data).then((response) => {
-          this.ruleForm = response.data;
+          this.ruleForm = response.data.data;
         });
       }
     },
@@ -205,11 +205,11 @@ export default {
               });
             });
           } else {
-            updateArticle(this.ruleForm).then((response) => {
+            article.updateArticle(this.ruleForm).then((response) => {
               _this.$alert("修改成功", "提示", {
                 confirmButtonText: "确定",
                 callback: (action) => {
-                  this.$router.push({ path: '/profile/index'})
+                  this.$router.push({ path: '/article/articleList'})
                 },
               });
             });

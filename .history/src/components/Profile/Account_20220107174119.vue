@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2022-01-06 17:05:33
- * @LastEditTime: 2022-01-07 17:41:20
- * @LastEditors: your name
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \education-vue-front\src\components\profile\Account.vue
--->
 
 <template>
   <el-form style="margin-top: 10px" size="small" label-width="65px">

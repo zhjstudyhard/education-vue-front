@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { getArticlePage,getFontArticlePage } from "../api/article/article";
+import { getArticlePage } from "../api/article/article";
 import {queryDictionaryAllPage} from "../api/dictionary/dictionary"
 export default {
   name: "Home",
@@ -86,7 +86,7 @@ export default {
         $("#header-photo").show();
       }
       let data = { currentPage: currentPage };
-      getFontArticlePage(data).then((response) => {
+      getArticlePage(data).then((response) => {
         // console.log("articels: ",response.data)
         this.articles = response.data.data;
         this.currentPage = response.data.current;

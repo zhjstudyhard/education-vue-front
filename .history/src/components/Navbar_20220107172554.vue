@@ -143,7 +143,7 @@
 
           <el-dropdown>
             <span class="el-dropdown-link" style="color: white">
-              {{ user.username }}
+              {{ userInfo.username }}
               <!-- 赵浩杰 -->
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
@@ -237,12 +237,7 @@ export default {
       logout().then((response) => {
         this.$store.commit("REMOVE_INFO");
         //刷新页面
-        if (this.$router.path === "/") {
-          location.reload();
-        } else {
-          this.$router.push(`/`);
-          location.reload();
-        }
+        location.reload();
       });
     },
     debounceQuery(queryString, callback) {

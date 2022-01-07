@@ -237,7 +237,7 @@ export default {
       logout().then((response) => {
         this.$store.commit("REMOVE_INFO");
         //刷新页面
-        if (this.$router.path === "/") {
+        if ($route.path === "/") {
           location.reload();
         } else {
           this.$router.push(`/`);

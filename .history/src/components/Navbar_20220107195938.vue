@@ -237,12 +237,7 @@ export default {
       logout().then((response) => {
         this.$store.commit("REMOVE_INFO");
         //刷新页面
-        if (this.$router.path === "/") {
-          location.reload();
-        } else {
-          this.$router.push(`/`);
-          location.reload();
-        }
+        location.reload();
       });
     },
     debounceQuery(queryString, callback) {

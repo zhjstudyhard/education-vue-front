@@ -114,7 +114,7 @@
 <script>
 // import PanThumb from "@/components/PanThumb";
 import { encrypt } from "../../util/rsaEncrypt";
-import { updatePassword } from "../../api/login/userLogin";
+import {updatePassword} from "../../api/login/userLogin"
 export default {
   // components: { PanThumb },
   // props: {
@@ -190,34 +190,33 @@ export default {
         if (valid) {
           // passForm.password = encrypt(user.password);
           let data = {
-            oldPassword: encrypt(this.passForm.oldPassword.trim()),
-            newPassword: encrypt(this.passForm.newPassword),
+            oldPassword: encrypt(passForm.oldPassword.trim()),
+            newPassword: encrypt(passForm.newPassword),
           };
-          updatePassword(data).then((response) => {
+          updatePassword(data).then(response =>{
             this.$alert("修改成功", "提示", {
-              confirmButtonText: "重新登陆",
-              callback: (action) => {
-                this.$refs[formName].resetFields();
-                this.$router.push({ path: "/login" });
-              },
-            });
-          });
-
-          // const _this = this;
-          // this.$axios
-          //   .post("/sys/user/updatePass", this.passForm)
-          //   .then((res) => {
-          //     _this.$alert(res.data.msg, "提示", {
-          //       confirmButtonText: "确定",
-          //       callback: (action) => {
-          //         this.$refs[formName].resetFields();
-          //       },
-          //     });
-          //   });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
+                confirmButtonText: "重新登陆",
+                callback: (action) => {
+                  this.$refs[formName].resetFields();
+                  
+                },
+              });
+          })
+        //   const _this = this;
+        //   this.$axios
+        //     .post("/sys/user/updatePass", this.passForm)
+        //     .then((res) => {
+        //       _this.$alert(res.data.msg, "提示", {
+        //         confirmButtonText: "确定",
+        //         callback: (action) => {
+        //           this.$refs[formName].resetFields();
+        //         },
+        //       });
+        //     });
+        // } else {
+        //   console.log("error submit!!");
+        //   return false;
+        // }
       });
     },
     resetForm(formName) {

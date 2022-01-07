@@ -70,7 +70,7 @@
       </div>
 
       <div class="user-skills user-bio-section"></div>
-      <el-dialog title="修改密码" :visible.sync="dialogFormVisible">
+      <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
         <el-form
           :model="passForm"
           status-icon
@@ -78,24 +78,24 @@
           ref="passForm"
           label-width="100px"
         >
-          <el-form-item label="旧密码" prop="oldPassword">
+          <el-form-item label="旧密码" prop="currentPass">
             <el-input
               type="password"
-              v-model="passForm.oldPassword"
+              v-model="passForm.currentPass"
               autocomplete="off"
             ></el-input>
           </el-form-item>
-          <el-form-item label="新密码" prop="newPassword">
+          <el-form-item label="新密码" prop="password">
             <el-input
               type="password"
-              v-model="passForm.newPassword"
+              v-model="passForm.password"
               autocomplete="off"
             ></el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="checkPassword">
+          <el-form-item label="确认密码" prop="checkPass">
             <el-input
               type="password"
-              v-model="passForm.checkPassword"
+              v-model="passForm.checkPass"
               autocomplete="off"
             ></el-input>
           </el-form-item>
@@ -113,8 +113,7 @@
 
 <script>
 // import PanThumb from "@/components/PanThumb";
-import { encrypt } from "../../util/rsaEncrypt";
-import { updatePassword } from "../../api/login/userLogin";
+
 export default {
   // components: { PanThumb },
   // props: {
@@ -134,7 +133,7 @@ export default {
     var validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value !== this.passForm.newPassword) {
+      } else if (value !== this.passForm.password) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
@@ -148,13 +147,13 @@ export default {
         // role: "",
       },
       passForm: {
-        oldPassword: "",
-        newPassword: "",
-        checkPassword: "",
+        password: "",
+        checkPass: "",
+        currentPass: "",
       },
       dialogFormVisible: false,
       rules: {
-        newPassword: [
+        password: [
           { required: true, message: "请输入新密码", trigger: "blur" },
           {
             min: 6,
@@ -163,11 +162,11 @@ export default {
             trigger: "blur",
           },
         ],
-        checkPassword: [
+        checkPass: [
           { required: true, validator: validatePass, trigger: "blur" },
         ],
-        oldPassword: [
-          { required: true, message: "请输入旧密码", trigger: "blur" },
+        currentPass: [
+          { required: true, message: "请输入当前密码", trigger: "blur" },
         ],
       },
     };
@@ -178,51 +177,6 @@ export default {
       this.user.avatar = userInfo.avatar;
       this.user = userInfo.user;
     }
-  },
-  methods: {
-    getUserInfo() {
-      this.$axios.get("/sys/userInfo").then((res) => {
-        this.userInfo = res.data.data;
-      });
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          // passForm.password = encrypt(user.password);
-          let data = {
-            oldPassword: encrypt(this.passForm.oldPassword.trim()),
-            newPassword: encrypt(this.passForm.newPassword),
-          };
-          updatePassword(data).then((response) => {
-            this.$alert("修改成功", "提示", {
-              confirmButtonText: "重新登陆",
-              callback: (action) => {
-                this.$refs[formName].resetFields();
-                this.$router.push({ path: "/login" });
-              },
-            });
-          });
-
-          // const _this = this;
-          // this.$axios
-          //   .post("/sys/user/updatePass", this.passForm)
-          //   .then((res) => {
-          //     _this.$alert(res.data.msg, "提示", {
-          //       confirmButtonText: "确定",
-          //       callback: (action) => {
-          //         this.$refs[formName].resetFields();
-          //       },
-          //     });
-          //   });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
   },
 };
 </script>

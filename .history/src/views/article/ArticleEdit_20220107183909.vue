@@ -209,7 +209,7 @@ export default {
               _this.$alert("修改成功", "提示", {
                 confirmButtonText: "确定",
                 callback: (action) => {
-                  this.$router.push({ path: '/profile/index'})
+                  // this.$router.push({ path: '/article/articleList'})
                 },
               });
             });
