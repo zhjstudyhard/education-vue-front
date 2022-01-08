@@ -182,6 +182,7 @@ export default {
                 // console.log("userInfo: ",response.data)
                 this.$store.commit("SET_USERINFO", response.data);
                 this.$router.push("/");
+                // window.location.reload();
                 this.loading = false;
               });
               // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});

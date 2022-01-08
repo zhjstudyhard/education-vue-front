@@ -1,19 +1,15 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-30 16:53:28
- * @LastEditTime: 2022-01-08 11:31:08
+ * @LastEditTime: 2022-01-08 11:27:11
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \education-vue-admin\src\views\profile\index.vue
 -->
 <template>
   <div class="app-container">
-    <!--顶部导航栏-->
-    <Navbar
-      class="navbar"
-      id="nav"
-      v-show="$route.name !== 'Home' || this.focusMode"
-    ></Navbar>
+     <!--顶部导航栏-->
+    <Navbar class = "navbar"  id="nav" v-show="$route.name!=='Home'||this.focusMode"></Navbar>
     <div v-if="user">
       <el-row :gutter="20">
         <el-col :span="6" :xs="24">
@@ -33,7 +29,7 @@
                 <account :user="user" />
               </el-tab-pane>
               <el-tab-pane label="文章管理" name="articleList">
-                <articleList />
+               <articleList/>
               </el-tab-pane>
               <!-- <el-tab-pane label="用户资料" name="account">
                 
@@ -49,7 +45,7 @@
 <script>
 import { mapGetters } from "vuex";
 import UserCard from "./UserCard";
-import ArticleList from "@/views/article/ArticleList";
+import ArticleList from '@/views/article/ArticleList'
 // import Activity from './components/Activity'
 // import Timeline from './components/Timeline'
 import Account from "./Account";
@@ -57,16 +53,16 @@ import Navbar from "../../components/Navbar";
 export default {
   name: "Profile",
   //
-  components: { UserCard, Account, ArticleList, Navbar },
+  components: { UserCard, Account,ArticleList,Navbar },
   data() {
     return {
       user: {},
       activeTab: "activity",
     };
   },
-  created() {
-    
-  },
+  created(){
+    this.$forceUpdate(); //重新渲染组件
+  }
   // computed: {
   //   ...mapGetters(["name", "avatar", "roles"]),
   // },

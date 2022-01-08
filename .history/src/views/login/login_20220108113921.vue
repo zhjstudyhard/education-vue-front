@@ -181,10 +181,10 @@ export default {
               getUserInfo().then((response) => {
                 // console.log("userInfo: ",response.data)
                 this.$store.commit("SET_USERINFO", response.data);
-                this.$router.push("/");
-                this.loading = false;
               });
               // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});
+              this.$router.push("/");
+              this.loading = false;
             })
             .catch(() => {
               this.loading = false;
