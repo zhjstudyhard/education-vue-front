@@ -226,7 +226,6 @@
 
 <script>
 import { queryDictionaryAllPage } from "../api/dictionary/dictionary";
-import { queryMessageCount } from "../api/article/message";
 import { logout } from "../api/login/userLogin";
 export default {
   name: "Navbar",
@@ -335,10 +334,6 @@ export default {
       this.avatar = userInfo.avatar;
       this.user = userInfo.user;
     }
-    queryMessageCount().then((response) => {
-      console.log("count: ", response);
-      this.messageCount = response.data;
-    });
   },
 };
 </script>

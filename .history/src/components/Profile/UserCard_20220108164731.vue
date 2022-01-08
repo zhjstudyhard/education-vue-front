@@ -6,7 +6,7 @@
 
     <div class="user-profile">
       <div class="box-center">
-        <!-- <pan-thumb
+        <pan-thumb
           :image="user.avatar"
           :height="'100px'"
           :width="'100px'"
@@ -14,7 +14,7 @@
         >
           <div>Hello</div>
           {{ user.username }}
-        </pan-thumb> -->
+        </pan-thumb>
       </div>
       <div class="box-center">
         <div class="user-name text-center">{{ user.username }}</div>
@@ -27,22 +27,19 @@
     <div class="user-bio">
       <div class="user-education user-bio-section">
         <div class="user-bio-section-header">
-          <!-- <svg-icon icon-class="education" /> -->
-          <span>Education</span>
+          <svg-icon icon-class="education" /><span>Education</span>
         </div>
         <div class="user-bio-section-body">
           <div class="text-muted">
             <ul class="user-info">
               <li>
                 <div style="height: 100%">
-                  <!-- <svg-icon icon-class="login" />  -->
-                  登录账号
+                  <svg-icon icon-class="login" /> 登录账号
                   <div class="user-right">{{ user.username }}</div>
                 </div>
               </li>
               <li>
-                <!-- <svg-icon icon-class="user1" />  -->
-                用户昵称
+                <svg-icon icon-class="user1" /> 用户昵称
                 <div class="user-right">{{ user.username }}</div>
               </li>
               <!-- <li>
@@ -51,20 +48,17 @@
               <!-- <div class="user-right">{{ user.username }}</div> -->
               <!-- </li> -->
               <li>
-                <!-- <svg-icon icon-class="phone" />  -->
-                手机号码
+                <svg-icon icon-class="phone" /> 手机号码
                 <!-- <div class="user-right">{{ user.phone }}</div> -->
                 <div class="user-right">{{ user.username }}</div>
               </li>
               <li>
-                <!-- <svg-icon icon-class="email" />  -->
-                用户邮箱
+                <svg-icon icon-class="email" /> 用户邮箱
                 <!-- <div class="user-right">{{ user.email }}</div> -->
                 <div class="user-right">{{ user.username }}</div>
               </li>
               <li>
-                <!-- <svg-icon icon-class="anq" />  -->
-                安全设置
+                <svg-icon icon-class="anq" /> 安全设置
                 <div class="user-right">
                   <a @click="dialogFormVisible = true">修改密码</a>
                   <!-- <a @click="$refs.email.dialog = true">修改邮箱</a> -->

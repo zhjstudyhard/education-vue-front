@@ -337,7 +337,6 @@ export default {
     }
     queryMessageCount().then((response) => {
       console.log("count: ", response);
-      this.messageCount = response.data;
     });
   },
 };

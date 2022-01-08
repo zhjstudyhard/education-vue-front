@@ -53,7 +53,7 @@
 import { mapGetters } from "vuex";
 import UserCard from "./UserCard";
 import ArticleList from "@/views/article/ArticleList";
-import CommentList from "@/views/article/CommentList";
+import ArticleList from "@/views/article/CommentList";
 // import Activity from './components/Activity'
 // import Timeline from './components/Timeline'
 import Account from "./Account";

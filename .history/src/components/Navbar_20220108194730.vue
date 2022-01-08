@@ -336,8 +336,8 @@ export default {
       this.user = userInfo.user;
     }
     queryMessageCount().then((response) => {
-      console.log("count: ", response);
-      this.messageCount = response.data;
+      // console.log("count: ", response);
+      this.messageCount = response;
     });
   },
 };

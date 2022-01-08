@@ -57,17 +57,6 @@
       </el-dropdown-menu>
     </el-dropdown>
 
-    <router-link
-      :class="{
-        'm-mobile-show': mobileHide,
-        active: $route.name === 'Archives',
-      }"
-      class="item"
-      style="text-decoration-line: none; color: white; padding: 20px"
-      to="/archives"
-    >
-      <el-badge :value="messageCount" class="item"> 消息 </el-badge>
-    </router-link>
     <!-- <router-link
       :class="{
         'm-mobile-show': mobileHide,
@@ -127,13 +116,12 @@
         text-decoration-line: none;
         color: white;
         padding: 20px;
-        margin-left: 900px;
+        margin-left: 700px;
       "
       to="/login"
     >
       登录
     </router-link>
-
     <router-link
       v-if="!isShow"
       :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
@@ -226,7 +214,6 @@
 
 <script>
 import { queryDictionaryAllPage } from "../api/dictionary/dictionary";
-import { queryMessageCount } from "../api/article/message";
 import { logout } from "../api/login/userLogin";
 export default {
   name: "Navbar",
@@ -242,7 +229,6 @@ export default {
       isShow: false,
       avatar: "",
       user: [],
-      messageCount: 0,
     };
   },
   methods: {
@@ -251,11 +237,11 @@ export default {
       logout().then((response) => {
         this.$store.commit("REMOVE_INFO");
         //刷新页面
-        if (this.$route.path === "/") {
+        if (this.$router.path === "/") {
           location.reload();
         } else {
-          // console.log("path: ",this.$route.path)
           this.$router.push(`/`);
+          // location.reload();
         }
       });
     },
@@ -335,10 +321,6 @@ export default {
       this.avatar = userInfo.avatar;
       this.user = userInfo.user;
     }
-    queryMessageCount().then((response) => {
-      console.log("count: ", response);
-      this.messageCount = response.data;
-    });
   },
 };
 </script>

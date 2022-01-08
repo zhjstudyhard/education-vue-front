@@ -35,8 +35,8 @@
               <el-tab-pane label="文章管理" name="articleList">
                 <articleList />
               </el-tab-pane>
-               <el-tab-pane label="评论管理" name="CommentList">
-                <commentList />
+               <el-tab-pane label="评论管理" name="articleList">
+                <articleList />
               </el-tab-pane>
               <!-- <el-tab-pane label="用户资料" name="account">
                 
@@ -53,7 +53,7 @@
 import { mapGetters } from "vuex";
 import UserCard from "./UserCard";
 import ArticleList from "@/views/article/ArticleList";
-import CommentList from "@/views/article/CommentList";
+import ArticleList from "@/views/article/CommentList";
 // import Activity from './components/Activity'
 // import Timeline from './components/Timeline'
 import Account from "./Account";
@@ -61,7 +61,7 @@ import Navbar from "../../components/Navbar";
 export default {
   name: "Profile",
   //
-  components: { UserCard, Account, ArticleList, Navbar,CommentList},
+  components: { UserCard, Account, ArticleList, Navbar },
   data() {
     return {
       user: {},

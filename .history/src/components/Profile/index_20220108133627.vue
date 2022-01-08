@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-30 16:53:28
- * @LastEditTime: 2022-01-08 13:38:51
+ * @LastEditTime: 2022-01-08 13:36:27
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \education-vue-admin\src\views\profile\index.vue
@@ -35,8 +35,8 @@
               <el-tab-pane label="文章管理" name="articleList">
                 <articleList />
               </el-tab-pane>
-               <el-tab-pane label="评论管理" name="CommentList">
-                <commentList />
+               <el-tab-pane label="评论管理" name="articleList">
+                <articleList />
               </el-tab-pane>
               <!-- <el-tab-pane label="用户资料" name="account">
                 
@@ -53,7 +53,6 @@
 import { mapGetters } from "vuex";
 import UserCard from "./UserCard";
 import ArticleList from "@/views/article/ArticleList";
-import CommentList from "@/views/article/CommentList";
 // import Activity from './components/Activity'
 // import Timeline from './components/Timeline'
 import Account from "./Account";
@@ -61,7 +60,7 @@ import Navbar from "../../components/Navbar";
 export default {
   name: "Profile",
   //
-  components: { UserCard, Account, ArticleList, Navbar,CommentList},
+  components: { UserCard, Account, ArticleList, Navbar },
   data() {
     return {
       user: {},
