@@ -66,7 +66,7 @@
       style="text-decoration-line: none; color: white; padding: 20px"
       to="/archives"
     >
-      <el-badge :value="messageCount" class="item" :hidden="hiddenBadge">
+      <el-badge :value="messageCount" class="item" :hidden="showBadge">
         消息
       </el-badge>
     </router-link>
@@ -245,7 +245,7 @@ export default {
       avatar: "",
       user: [],
       messageCount: 0,
-      hiddenBadge: true,
+      showBadge: true,
     };
   },
   methods: {
@@ -335,7 +335,7 @@ export default {
       queryMessageCount().then((response) => {
         this.messageCount = response.data;
         if(this.messageCount > 0){
-           this.hiddenBadge = false
+           this.showBadge = false
         }
       });
     }

@@ -335,7 +335,7 @@ export default {
       queryMessageCount().then((response) => {
         this.messageCount = response.data;
         if(this.messageCount > 0){
-           this.hiddenBadge = false
+           this.showBadge = false
         }
       });
     }
