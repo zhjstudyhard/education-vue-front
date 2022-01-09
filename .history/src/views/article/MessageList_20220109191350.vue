@@ -1,10 +1,5 @@
 <template>
   <div class="link-message-container">
-    <Navbar
-      class="navbar"
-      id="nav"
-      v-show="$route.name !== 'Home' || this.focusMode"
-    ></Navbar>
     <div class="container">
       <div class="space-right">
         <div class="space-right-top">
@@ -31,7 +26,7 @@
                       <div class="content-list">
                         <span class="text"> 回复 </span>
                         <a>@啥也不会的学生</a>
-                        <span class="text"> :可以的</span>
+                        <span class="text">:可以的</span>
                       </div>
                     </div>
                     <div class="orginal-reply">
@@ -131,12 +126,7 @@
 </template>
 
 <script>
-import Navbar from "../../components/Navbar";
-export default {
-  components: {
-    Navbar,
-  },
-};
+export default {};
 </script>
 <style scoped>
 .link-message-container {

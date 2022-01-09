@@ -259,7 +259,6 @@ export default {
         } else {
           // console.log("path: ",this.$route.path)
           this.$router.push(`/`);
-          location.reload();
         }
       });
     },

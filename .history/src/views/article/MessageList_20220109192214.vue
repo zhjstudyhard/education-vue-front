@@ -1,10 +1,5 @@
 <template>
   <div class="link-message-container">
-    <Navbar
-      class="navbar"
-      id="nav"
-      v-show="$route.name !== 'Home' || this.focusMode"
-    ></Navbar>
     <div class="container">
       <div class="space-right">
         <div class="space-right-top">
@@ -131,11 +126,8 @@
 </template>
 
 <script>
-import Navbar from "../../components/Navbar";
 export default {
-  components: {
-    Navbar,
-  },
+
 };
 </script>
 <style scoped>
