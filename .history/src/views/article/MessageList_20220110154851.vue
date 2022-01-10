@@ -233,9 +233,10 @@ export default {
 <style scoped>
 .link-message-container {
   width: 100%;
+  height: 100%;
 }
 .container {
-  /* height: 1200px; */
+  height: 1200px;
   /* height: calc(100vh - 56px); */
   margin: 0 auto;
   max-width: 1143px;
@@ -310,7 +311,7 @@ export default {
   margin-bottom: 10px;
   border-radius: 4px;
   /* height: 600px; */
-  /* height: 1200px; */
+  height: 1200px;
 }
 .reply-item {
   padding-top: 24px;

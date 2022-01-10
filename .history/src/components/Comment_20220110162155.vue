@@ -158,9 +158,10 @@ export default {
         this.comments = response.data.data;
         this.total = response.data.total;
         this.commentCount = this.comments.length;
-        for (var i in this.comments) {
-          this.commentCount = this.commentCount + this.comments[i].replyComments.length;
-        }
+        // for (var i in this.comments) {
+        //   this.commentCount =
+        //     this.commentCount + this.comments[i].replyComments.length;
+        // }
       });
       // this.$axios.get("/comment/" + this.blogId).then((res) => {
       //   this.comments = res.data.data;

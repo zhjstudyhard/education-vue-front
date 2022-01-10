@@ -353,13 +353,6 @@ export default {
     setOnmessageMessage(event) {
       // 根据服务器推送的消息做自己的业务处理
       console.log("服务端返回：" + event.data);
-      if(event.data == 0){
-        this.hiddenBadge = true
-      }else{
-        this.hiddenBadge = false
-      }
-      this.messageCount = event.data
-      
     },
     setOncloseMessage() {
       console.log("WebSocket连接关闭    状态码：" + this.websocket.readyState);
@@ -387,9 +380,9 @@ export default {
       }
     }
   },
-  // beforeDestroy() {
-  //   this.onbeforeunload();
-  // },
+  beforeDestroy() {
+    this.onbeforeunload();
+  },
   created() {
     if (sessionStorage.getItem("token")) {
       this.isShow = true;

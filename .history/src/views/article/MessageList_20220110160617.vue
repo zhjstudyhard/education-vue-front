@@ -233,6 +233,7 @@ export default {
 <style scoped>
 .link-message-container {
   width: 100%;
+  height: 100%;
 }
 .container {
   /* height: 1200px; */

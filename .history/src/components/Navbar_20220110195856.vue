@@ -246,7 +246,6 @@ export default {
       user: [],
       messageCount: 0,
       hiddenBadge: true,
-      flag: false,
     };
   },
   methods: {
@@ -353,13 +352,6 @@ export default {
     setOnmessageMessage(event) {
       // 根据服务器推送的消息做自己的业务处理
       console.log("服务端返回：" + event.data);
-      if(event.data == 0){
-        this.hiddenBadge = true
-      }else{
-        this.hiddenBadge = false
-      }
-      this.messageCount = event.data
-      
     },
     setOncloseMessage() {
       console.log("WebSocket连接关闭    状态码：" + this.websocket.readyState);
@@ -376,24 +368,21 @@ export default {
       this.mobileHide = true;
     }
     // WebSocket
-    if (this.flag) {
-      if ("WebSocket" in window) {
-        this.websocket = new WebSocket(
-          "ws://localhost:8089/webSocket/" + this.user.id
-        );
-        this.initWebSocket();
-      } else {
-        alert("当前浏览器 Not support websocket");
-      }
+    if ("WebSocket" in window) {
+      this.websocket = new WebSocket(
+        "ws://localhost:8801/myproject/websocket/" + this.userName
+      );
+      this.initWebSocket();
+    } else {
+      alert("当前浏览器 Not support websocket");
     }
   },
-  // beforeDestroy() {
-  //   this.onbeforeunload();
-  // },
+  beforeDestroy() {
+    this.onbeforeunload();
+  },
   created() {
     if (sessionStorage.getItem("token")) {
       this.isShow = true;
-      this.flag = true
       queryMessageCount().then((response) => {
         this.messageCount = response.data;
         if (this.messageCount > 0) {

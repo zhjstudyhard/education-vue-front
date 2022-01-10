@@ -355,11 +355,8 @@ export default {
       console.log("服务端返回：" + event.data);
       if(event.data == 0){
         this.hiddenBadge = true
-      }else{
-        this.hiddenBadge = false
       }
       this.messageCount = event.data
-      
     },
     setOncloseMessage() {
       console.log("WebSocket连接关闭    状态码：" + this.websocket.readyState);

@@ -1,6 +1,10 @@
 <template>
   <div class="link-message-container">
-    <Navbar class="navbar" id="nav"></Navbar>
+    <Navbar
+      class="navbar"
+      id="nav"
+      v-show="$route.name !== 'Home' || this.focusMode"
+    ></Navbar>
     <div class="container">
       <div class="space-right">
         <div class="space-right-top">
@@ -11,54 +15,32 @@
         <div class="reply-content">
           <div class="reply">
             <div class="reply-item">
-              <div
-                class="basic-list-item"
-                v-for="message of messageList"
-                :key="message.id"
-              >
+              <div class="basic-list-item">
                 <div class="left-box">
                   <a class="avatar"> </a>
                 </div>
                 <div class="center-box">
                   <div class="line-1">
                     <span class="name-filed">
-                      <!-- <a>赵浩杰</a> -->
-                      <a>{{ message.fromUserName }}</a>
-                      <span
-                        class="desc-filed"
-                        v-if="message.type !== 'MESSAGE_COMMENT'"
-                        >回复了我的评论</span
-                      >
-                      <span
-                        class="desc-filed"
-                        v-if="message.type === 'MESSAGE_COMMENT'"
-                        >评论了我</span
-                      >
+                      <a>赵浩杰</a>
+                      <span class="desc-filed">回复了我的评论</span>
                     </span>
                   </div>
                   <div class="line-2">
                     <div class="real-reply">
                       <div class="content-list">
                         <span class="text"> 回复 </span>
-                        <!-- <a>@啥也不会的学生</a> -->
-                        <a>@{{ message.toUserName }}</a>
-                        <span class="text"> :{{ message.content }}</span>
+                        <a>@啥也不会的学生</a>
+                        <span class="text"> :可以的</span>
                       </div>
                     </div>
-                    <div
-                      class="orginal-reply"
-                      v-if="message.type !== 'MESSAGE_COMMENT'"
-                    >
-                      <!-- 啥也不会的学生：回复@赵浩男：你真版 -->
-                      {{ message.parentFromUserName }}：回复@{{
-                        message.parentToUserName
-                      }}：{{ message.parentContent }}
+                    <div class="orginal-reply">
+                      啥也不会的学生：回复@赵浩男：你真版
                     </div>
                   </div>
                   <div class="line-3">
                     <span class="time-filed">
-                      <!-- <span class="time-span">2021年10月22日 15:32</span> -->
-                      <span class="time-span">{{ message.gmtCreate }}</span>
+                      <span class="time-span">2021年10月22日 15:32</span>
                     </span>
                     <div class="action-field">
                       <button class="action-button">
@@ -69,10 +51,7 @@
                         </svg>
                         回复
                       </button>
-                      <button
-                        class="action-button del-button"
-                        @click="delMessage(message.id)"
-                      >
+                      <button class="action-button del-button">
                         <svg
                           data-v-33b3ab9a=""
                           viewBox="0 0 16 16"
@@ -143,21 +122,6 @@
                   <div class="divider"></div>
                 </div>
               </div>
-              <!--分页-->
-              <div class="home-page">
-                <!--分页-->
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="query.currentPage"
-                  :page-sizes="[10, 20, 30, 50]"
-                  :page-size="query.pageSize"
-                  :total="total"
-                  layout="total, sizes, prev, pager, next, jumper"
-                  background
-                >
-                </el-pagination>
-              </div>
             </div>
           </div>
         </div>
@@ -169,7 +133,7 @@
 <script>
 import { Form } from "element-ui";
 import Navbar from "../../components/Navbar";
-import { queryMessagePage, delMessagePage } from "../../api/article/message";
+import { queryMessagePage } from "../../api/article/message";
 export default {
   components: {
     Navbar,
@@ -180,49 +144,13 @@ export default {
         currentPage: 1,
         pageSize: 10,
       },
-      messageList: [],
-      total: 0,
     };
   },
   methods: {
-    //分页查询
     getData() {
       queryMessagePage(this.query).then((response) => {
-        // console.log("message: ", response.data);
-        this.messageList = response.data.data;
-        this.total = response.data.total;
+        console.log("message: ",response.data.data)
       });
-    },
-    //删除通知
-    delMessage(id) {
-      let data = { id: id };
-
-      this.$confirm("确认删除当前消息?", "Warning", {
-        confirmButtonText: "确认",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then((response) => {
-          delMessagePage(data).then((response) => {
-            this.$message({
-              type: "success",
-              message: "删除成功!",
-            });
-            this.query.currentPage = 1;
-            this.getData();
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
-    handleSizeChange(newPageSize) {
-      this.query.pageSize = newPageSize;
-      this.getData();
-    },
-    handleCurrentChange(newPage) {
-      this.query.currentPage = newPage;
-      this.getData();
     },
   },
   created() {
@@ -235,8 +163,7 @@ export default {
   width: 100%;
 }
 .container {
-  /* height: 1200px; */
-  /* height: calc(100vh - 56px); */
+  height: calc(100vh - 56px);
   margin: 0 auto;
   max-width: 1143px;
   display: -webkit-box;
@@ -309,8 +236,7 @@ export default {
   box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
   margin-bottom: 10px;
   border-radius: 4px;
-  /* height: 600px; */
-  /* height: 1200px; */
+  height: 600px;
 }
 .reply-item {
   padding-top: 24px;

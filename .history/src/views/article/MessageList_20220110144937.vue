@@ -1,6 +1,10 @@
 <template>
   <div class="link-message-container">
-    <Navbar class="navbar" id="nav"></Navbar>
+    <Navbar
+      class="navbar"
+      id="nav"
+      v-show="$route.name !== 'Home' || this.focusMode"
+    ></Navbar>
     <div class="container">
       <div class="space-right">
         <div class="space-right-top">
@@ -57,8 +61,7 @@
                   </div>
                   <div class="line-3">
                     <span class="time-filed">
-                      <!-- <span class="time-span">2021年10月22日 15:32</span> -->
-                      <span class="time-span">{{ message.gmtCreate }}</span>
+                      <span class="time-span">2021年10月22日 15:32</span>
                     </span>
                     <div class="action-field">
                       <button class="action-button">
@@ -143,21 +146,6 @@
                   <div class="divider"></div>
                 </div>
               </div>
-              <!--分页-->
-              <div class="home-page">
-                <!--分页-->
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="query.currentPage"
-                  :page-sizes="[10, 20, 30, 50]"
-                  :page-size="query.pageSize"
-                  :total="total"
-                  layout="total, sizes, prev, pager, next, jumper"
-                  background
-                >
-                </el-pagination>
-              </div>
             </div>
           </div>
         </div>
@@ -169,7 +157,7 @@
 <script>
 import { Form } from "element-ui";
 import Navbar from "../../components/Navbar";
-import { queryMessagePage, delMessagePage } from "../../api/article/message";
+import { queryMessagePage,delMessagePage } from "../../api/article/message";
 export default {
   components: {
     Navbar,
@@ -188,42 +176,18 @@ export default {
     //分页查询
     getData() {
       queryMessagePage(this.query).then((response) => {
-        // console.log("message: ", response.data);
+        console.log("message: ", response.data);
         this.messageList = response.data.data;
         this.total = response.data.total;
       });
     },
     //删除通知
-    delMessage(id) {
-      let data = { id: id };
-
-      this.$confirm("确认删除当前消息?", "Warning", {
-        confirmButtonText: "确认",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then((response) => {
-          delMessagePage(data).then((response) => {
-            this.$message({
-              type: "success",
-              message: "删除成功!",
-            });
-            this.query.currentPage = 1;
-            this.getData();
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
-    handleSizeChange(newPageSize) {
-      this.query.pageSize = newPageSize;
-      this.getData();
-    },
-    handleCurrentChange(newPage) {
-      this.query.currentPage = newPage;
-      this.getData();
-    },
+    delMessage(id){
+      let data = {"id":id}
+       delMessagePage(data).then(response =>{
+         
+       })
+    }
   },
   created() {
     this.getData();
@@ -235,8 +199,7 @@ export default {
   width: 100%;
 }
 .container {
-  /* height: 1200px; */
-  /* height: calc(100vh - 56px); */
+  height: calc(100vh - 56px);
   margin: 0 auto;
   max-width: 1143px;
   display: -webkit-box;
@@ -309,8 +272,7 @@ export default {
   box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
   margin-bottom: 10px;
   border-radius: 4px;
-  /* height: 600px; */
-  /* height: 1200px; */
+  height: 600px;
 }
 .reply-item {
   padding-top: 24px;
