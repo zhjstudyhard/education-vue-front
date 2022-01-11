@@ -1,6 +1,6 @@
 <template>
   <div class="ui top segment" style="text-align: center">
-    <h2 class="m-text-500">分类文章</h2>
+    <h2 class="m-text-500">分类 {{ type }} 下的文章</h2>
     <el-card
       v-for="article in articles"
       :body-style="{ padding: '0px' }"

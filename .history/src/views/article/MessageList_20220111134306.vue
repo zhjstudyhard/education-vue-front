@@ -230,7 +230,7 @@ export default {
       // console.log("id: ",id)
       //查询文章信息
       if (message.targetType === 0) {
-        this.$router.push(`/article/${message.targetId}`);
+        this.$router.push(`/article/${message.id}`);
       } else if (message.targetType === 1) {
       }
     },

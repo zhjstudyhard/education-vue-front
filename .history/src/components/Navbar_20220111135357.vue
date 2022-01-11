@@ -24,6 +24,10 @@
 
     <el-dropdown trigger="click" @mousedown.native="getTypes">
       <span
+        :class="{
+          'm-mobile-show': mobileHide,
+          active: $route.name === 'Category',
+        }"
         class="el-dropdown-link item"
         style="
           text-decoration-line: none;
@@ -53,12 +57,7 @@
       </el-dropdown-menu>
     </el-dropdown>
 
-    <div class="message" @click="queryClick" style="cursor: pointer">
-      <el-badge :value="messageCount" class="item" :hidden="hiddenBadge">
-        消息
-      </el-badge>
-    </div>
-    <!-- <router-link
+    <router-link
       :class="{
         'm-mobile-show': mobileHide,
         active: $route.name === '消息通知',
@@ -70,7 +69,7 @@
       <el-badge :value="messageCount" class="item" :hidden="hiddenBadge">
         消息
       </el-badge>
-    </router-link> -->
+    </router-link>
     <!-- <router-link
       :class="{
         'm-mobile-show': mobileHide,
@@ -124,11 +123,13 @@
 
     <router-link
       v-if="!isShow"
+      :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
+      class="item"
       style="
         text-decoration-line: none;
         color: white;
-        padding: 15px;
-        margin-left: 970px;
+        padding: 20px;
+        margin-left: 900px;
       "
       to="/login"
     >
@@ -137,6 +138,7 @@
 
     <router-link
       v-if="!isShow"
+      :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
       style="
         text-decoration-line: none;
         color: white;
@@ -152,25 +154,27 @@
       <el-header>
         <div class="header-avatar">
           <el-avatar size="medium" :src="avatar"></el-avatar>
+
           <el-dropdown>
-            <div style="margin-top: 5px">
-              <span class="el-dropdown-link" style="color: white">
-                {{ user.username }}
-                <!-- 赵浩杰 -->
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
-                  <router-link to="/profile/index">我的主页</router-link>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <router-link to="/messageList">我的消息</router-link>
-                </el-dropdown-item>
-                <el-dropdown-item @click.native="logout"
-                  >退出登录</el-dropdown-item
-                >
-              </el-dropdown-menu>
-            </div>
+            <span class="el-dropdown-link" style="color: white">
+              {{ user.username }}
+              <!-- 赵浩杰 -->
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <!-- <el-dropdown-item>
+                <router-link to="/profile/index">基本设置</router-link>
+              </el-dropdown-item> -->
+              <el-dropdown-item>
+                <router-link to="/profile/index">我的主页</router-link>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <router-link to="/messageList">我的消息</router-link>
+              </el-dropdown-item>
+              <el-dropdown-item @click.native="logout"
+                >退出登录</el-dropdown-item
+              >
+            </el-dropdown-menu>
           </el-dropdown>
         </div>
       </el-header>
@@ -226,7 +230,6 @@
 import { queryDictionaryAllPage } from "../api/dictionary/dictionary";
 import { queryMessageCount } from "../api/article/message";
 import { logout } from "../api/login/userLogin";
-import { MessageBox, Message } from "element-ui";
 export default {
   name: "Navbar",
   data() {
@@ -247,23 +250,6 @@ export default {
     };
   },
   methods: {
-    queryClick() {
-      if (this.flag) {
-        this.$router.push(`/messageList`);
-      } else {
-        // to re-login
-        MessageBox.confirm("请登录", "确认登陆", {
-          confirmButtonText: "登陆",
-          cancelButtonText: "取消",
-          type: "warning",
-        }).then(() => {
-          this.$store.commit("REMOVE_INFO");
-          this.$router.push({
-            path: "/login",
-          });
-        });
-      }
-    },
     //用固话登出
     logout() {
       logout().then((response) => {
@@ -367,12 +353,13 @@ export default {
     setOnmessageMessage(event) {
       // 根据服务器推送的消息做自己的业务处理
       console.log("服务端返回：" + event.data);
-      if (event.data == 0) {
-        this.hiddenBadge = true;
-      } else {
-        this.hiddenBadge = false;
+      if(event.data == 0){
+        this.hiddenBadge = true
+      }else{
+        this.hiddenBadge = false
       }
-      this.messageCount = event.data;
+      this.messageCount = event.data
+      
     },
     setOncloseMessage() {
       console.log("WebSocket连接关闭    状态码：" + this.websocket.readyState);
@@ -406,7 +393,7 @@ export default {
   created() {
     if (sessionStorage.getItem("token")) {
       this.isShow = true;
-      this.flag = true;
+      this.flag = true
       queryMessageCount().then((response) => {
         this.messageCount = response.data;
         if (this.messageCount > 0) {
@@ -519,25 +506,22 @@ export default {
 }
 .right-menu {
   float: right;
-  margin-top: 0px;
+  height: 100%;
+  line-height: 40px;
+  padding: 0px;
+  /* height: 100%; */
+  /* background: white; */
 }
 .header-avatar {
   float: right;
-  width: 100px;
+  width: 120px;
   display: flex;
   justify-content: space-around;
-  /* align-items: center; */
+  align-items: center;
 }
 
 .el-dropdown-link {
   cursor: pointer;
-}
-.message {
-  float: right;
-  margin-right: 30px;
-  padding-top: 0px;
-  text-decoration-line: none;
-  color: white;
 }
 /* .right-menu {
   float: right;

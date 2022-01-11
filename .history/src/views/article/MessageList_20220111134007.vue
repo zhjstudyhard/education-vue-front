@@ -15,7 +15,7 @@
                 class="basic-list-item"
                 v-for="message of messageList"
                 :key="message.id"
-                @click="queryClick(message)"
+                @click="queryClick(message.id)"
               >
                 <div class="left-box">
                   <a class="avatar"> </a>
@@ -226,14 +226,9 @@ export default {
       this.query.currentPage = newPage;
       this.getData();
     },
-    queryClick(message) {
-      // console.log("id: ",id)
-      //查询文章信息
-      if (message.targetType === 0) {
-        this.$router.push(`/article/${message.targetId}`);
-      } else if (message.targetType === 1) {
-      }
-    },
+    queryClick(id){
+      console.log("id: ",id)
+    }
   },
   created() {
     this.getData();

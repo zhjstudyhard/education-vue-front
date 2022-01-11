@@ -24,6 +24,10 @@
 
     <el-dropdown trigger="click" @mousedown.native="getTypes">
       <span
+        :class="{
+          'm-mobile-show': mobileHide,
+          active: $route.name === 'Category',
+        }"
         class="el-dropdown-link item"
         style="
           text-decoration-line: none;

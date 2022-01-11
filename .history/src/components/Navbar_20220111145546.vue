@@ -24,6 +24,10 @@
 
     <el-dropdown trigger="click" @mousedown.native="getTypes">
       <span
+        :class="{
+          'm-mobile-show': mobileHide,
+          active: $route.name === 'Category',
+        }"
         class="el-dropdown-link item"
         style="
           text-decoration-line: none;
@@ -226,7 +230,6 @@
 import { queryDictionaryAllPage } from "../api/dictionary/dictionary";
 import { queryMessageCount } from "../api/article/message";
 import { logout } from "../api/login/userLogin";
-import { MessageBox, Message } from "element-ui";
 export default {
   name: "Navbar",
   data() {
@@ -252,11 +255,15 @@ export default {
         this.$router.push(`/messageList`);
       } else {
         // to re-login
-        MessageBox.confirm("请登录", "确认登陆", {
-          confirmButtonText: "登陆",
-          cancelButtonText: "取消",
-          type: "warning",
-        }).then(() => {
+        MessageBox.confirm(
+          "请登录",
+          "确认登陆",
+          {
+            confirmButtonText: "登陆",
+            cancelButtonText: "取消",
+            type: "warning",
+          }
+        ).then(() => {
           this.$store.commit("REMOVE_INFO");
           this.$router.push({
             path: "/login",
