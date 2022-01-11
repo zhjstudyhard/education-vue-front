@@ -106,6 +106,7 @@
     <!--自带防抖-->
     <el-autocomplete
       v-model="queryString"
+      :class="{ 'm-mobile-hide': mobileHide }"
       :fetch-suggestions="debounceQuery"
       class="right item m-search"
       placeholder="请输入内容"
@@ -173,6 +174,50 @@
           </el-dropdown>
         </div>
       </el-header>
+      <!-- <el-dropdown
+        style="
+          position: relative;
+          display: inline-block;
+          height: 100%;
+          font-size: 18px;
+          color: #5a5e66;
+          vertical-align: text-bottom;
+          cursor: pointer;
+          transition: background 0.3s;
+          &:hover {
+            background: rgba(0, 0, 0, 0.025);
+          }
+        "
+        trigger="click"
+      >
+        <div class="avatar-wrapper">
+
+          <img
+            :src="avatar"
+            style="
+              cursor: pointer;
+              width: 40px;
+              height: 40px;
+              border-radius: 10px;
+            "
+          />
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu
+          slot="dropdown"
+          style="background-color: #333333;"
+        >
+          <router-link to="/profile/index">
+            <el-dropdown-item>个人信息</el-dropdown-item>
+          </router-link>
+          <el-dropdown-item divided @click.native="logout">
+            <span style="display: block"
+              >退出登录<el-badge is-dot></el-badge
+            ></span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown> -->
+      <!-- </el-container> -->
     </div>
   </div>
 </template>
@@ -234,7 +279,6 @@ export default {
       });
     },
     
-    //查询数据
     debounceQuery(queryString, callback) {
       this.timer && clearTimeout(this.timer);
       this.timer = setTimeout(
@@ -279,15 +323,15 @@ export default {
           _this.msgError("请求失败");
         });
     },
-    //点击选择时执行的方法
+    //文章分类跳转
+    categoryRoute(type) {
+      this.$router.push(`/category/${type}`);
+    },
+
     handleSelect(item) {
       if (item.id) {
         this.$router.push(`/blog/${item.id}`);
       }
-    },
-    //文章分类跳转
-    categoryRoute(type) {
-      this.$router.push(`/category/${type}`);
     },
 
     getTypes() {

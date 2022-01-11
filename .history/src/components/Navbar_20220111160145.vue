@@ -233,8 +233,7 @@ export default {
         }
       });
     },
-    
-    //查询数据
+
     debounceQuery(queryString, callback) {
       this.timer && clearTimeout(this.timer);
       this.timer = setTimeout(
@@ -279,7 +278,6 @@ export default {
           _this.msgError("请求失败");
         });
     },
-    //点击选择时执行的方法
     handleSelect(item) {
       if (item.id) {
         this.$router.push(`/blog/${item.id}`);
