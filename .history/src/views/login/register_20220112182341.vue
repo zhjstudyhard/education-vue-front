@@ -19,7 +19,7 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="username"
+          placeholder="请输入用户名"
           name="username"
           type="text"
           tabindex="1"
@@ -42,7 +42,7 @@
             ref="password"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="password"
+            placeholder="请输入密码"
             name="password"
             tabindex="2"
             autocomplete="on"
@@ -52,10 +52,33 @@
             @keyup.enter.native="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
-            <i class="el-icon-view"></i>
-            <!-- <svg-icon
+            <svg-icon
               :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
-            /> -->
+            />
+          </span>
+        </el-form-item>
+        <el-form-item prop="password">
+          <span class="svg-container">
+            <i class="el-icon-lock"></i>
+          </span>
+          <el-input
+            :key="passwordType"
+            ref="password"
+            v-model="loginForm.password"
+            :type="passwordType"
+            placeholder="再次输入密码"
+            name="password"
+            tabindex="2"
+            autocomplete="on"
+            auto-complete="new-password"
+            @keyup.native="checkCapslock"
+            @blur="capsTooltip = false"
+            @keyup.enter.native="handleLogin"
+          />
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon
+              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
+            />
           </span>
         </el-form-item>
       </el-tooltip>
@@ -82,134 +105,19 @@ import { validUsername } from "../../util/validate";
 import { encrypt } from "../../util/rsaEncrypt";
 import { login, getUserInfo } from "../../api/login/userLogin";
 export default {
-  name: "Login",
   data() {
-    const validateUsername = (rule, value, callback) => {
-      // if (!validUsername(value)) {
-      //   callback(new Error('Please enter the correct user name'))
-      // } else {
-      callback();
-      // }
-    };
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error("The password can not be less than 6 digits"));
-      } else {
-        callback();
-      }
-    };
     return {
-      loginForm: {
-        // username: 'admin',
-        // password: '111111'
+      formRegister: {
         username: "",
         password: "",
+        checkPassword: "",
       },
-      loginRules: {
-        username: [
-          { required: true, trigger: "blur", validator: validateUsername },
-        ],
-        password: [
-          { required: true, trigger: "blur", validator: validatePassword },
-        ],
+      rules: {
+        username: [{ validator: checkUserName, trigger: "blur" }],
+        password: [{ validator: checkPassword, trigger: "blur" }],
+        checkPassword: [{ validator: checkPasswordAgain, trigger: "blur" }],
       },
-      passwordType: "password",
-      capsTooltip: false,
-      loading: false,
-      showDialog: false,
-      redirect: undefined,
-      otherQuery: {},
     };
-  },
-  watch: {
-    $route: {
-      handler: function (route) {
-        const query = route.query;
-        if (query) {
-          this.redirect = query.redirect;
-          this.otherQuery = this.getOtherQuery(query);
-        }
-      },
-      immediate: true,
-    },
-  },
-  created() {
-    // window.addEventListener('storage', this.afterQRScan)
-  },
-  mounted() {
-    if (this.loginForm.username === "") {
-      this.$refs.username.focus();
-    } else if (this.loginForm.password === "") {
-      this.$refs.password.focus();
-    }
-  },
-  destroyed() {
-    // window.removeEventListener('storage', this.afterQRScan)
-  },
-  methods: {
-    checkCapslock(e) {
-      const { key } = e;
-      this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
-    },
-    showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
-      } else {
-        this.passwordType = "password";
-      }
-      //图标显示
-      let e = document.getElementsByClassName("el-icon-view")[0];
-      this.passwordType == ""
-        ? e.setAttribute("style", "color: #409EFF")
-        : e.setAttribute("style", "color: #c0c4cc");
-
-      this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
-    },
-    handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
-        const user = {
-          username: this.loginForm.username,
-          password: this.loginForm.password,
-        };
-        if (valid) {
-          this.loading = true;
-          user.password = encrypt(user.password);
-          let data = {
-            username: user.username.trim(),
-            password: user.password,
-          };
-          // this.$store.dispatch('user/login', this.loginForm)
-          login(data)
-            .then((response) => {
-              this.$store.commit("SET_TOKEN", response.token);
-              //查询用户信息
-              getUserInfo().then((response) => {
-                // console.log("userInfo: ",response.data)
-                this.$store.commit("SET_USERINFO", response.data);
-                this.$router.push("/");
-                this.loading = false;
-              });
-              // this.$router.push({path: this.redirect || "/",query: this.otherQuery,});
-            })
-            .catch(() => {
-              this.loading = false;
-            });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
-    getOtherQuery(query) {
-      return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== "redirect") {
-          acc[cur] = query[cur];
-        }
-        return acc;
-      }, {});
-    },
   },
 };
 </script>

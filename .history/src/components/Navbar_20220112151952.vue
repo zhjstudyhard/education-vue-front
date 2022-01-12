@@ -116,9 +116,10 @@
     >
       <i slot="suffix" class="search icon el-input__icon"></i>
       <template slot-scope="{ item }">
-        <div v-html="item.title" style="text-align:center"></div>
-        <div v-html="item.description"></div>
-        <span class="content" v-html="item.content"></span>
+        <div class="title">{{ item.title }}</div>
+        <!-- <span class="content">{{ item.content }}</span> -->
+        <div class="title">{{ item.description }}</div>
+        <span class="content">{{ item.content }}</span>
       </template>
     </el-autocomplete>
 
@@ -245,7 +246,22 @@ export default {
       //   1000
       // );
     },
+    // getIsPhone() {
+    //   let flag = navigator.userAgent.match(
+    //     /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    //   );
+    //   return flag;
+    // },
+
     querySearchAsync(queryString, callback) {
+      // queryString == null ||
+      //   queryString.trim() === "" ||
+      //   queryString.indexOf("%") !== -1 ||
+      //   queryString.indexOf("_") !== -1 ||
+      //   queryString.indexOf("[") !== -1 ||
+      //   queryString.indexOf("#") !== -1 ||
+      //   queryString.indexOf("*") !== -1 ||
+      //   queryString.trim().length > 20
       if (queryString == null || queryString.trim() === "") {
         return;
       }
@@ -277,8 +293,7 @@ export default {
     //点击选择时执行的方法
     handleSelect(item) {
       if (item.id) {
-        this.$router.push(`/article/${item.id}`);
-        // this.$router.push(`/blog/${item.id}`);
+        this.$router.push(`/blog/${item.id}`);
       }
     },
     //文章分类跳转

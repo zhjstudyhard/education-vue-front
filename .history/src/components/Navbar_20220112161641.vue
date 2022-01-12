@@ -115,11 +115,11 @@
       @select="handleSelect"
     >
       <i slot="suffix" class="search icon el-input__icon"></i>
-      <template slot-scope="{ item }">
-        <div v-html="item.title" style="text-align:center"></div>
-        <div v-html="item.description"></div>
-        <span class="content" v-html="item.content"></span>
-      </template>
+      <!-- <template slot-scope="{ item }">
+        <div>{{ item.title }}</div>
+        <div>{{ item.description }}</div>
+        <span class="content">{{ item.content }}</span>
+      </template> -->
     </el-autocomplete>
 
     <router-link
@@ -238,12 +238,12 @@ export default {
 
     //查询数据
     debounceQuery(queryString, callback) {
-      this.querySearchAsync(queryString, callback);
-      // this.timer && clearTimeout(this.timer);
-      // this.timer = setTimeout(
-      //   () => this.querySearchAsync(queryString, callback),
-      //   1000
-      // );
+      // this.querySearchAsync(queryString, callback);
+      this.timer && clearTimeout(this.timer);
+      this.timer = setTimeout(
+        () => this.querySearchAsync(queryString, callback),
+        1000
+      );
     },
     querySearchAsync(queryString, callback) {
       if (queryString == null || queryString.trim() === "") {

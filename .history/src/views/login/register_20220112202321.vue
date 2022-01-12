@@ -9,7 +9,7 @@
       label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">注 册</h3>
+        <h3 class="title">登 录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -83,7 +83,6 @@
 </template>
 
 <script>
-import { MessageBox, Message } from "element-ui";
 import { validUsername } from "../../util/validate";
 import { encrypt } from "../../util/rsaEncrypt";
 import { login, getUserInfo, registeUser } from "../../api/login/userLogin";
@@ -161,6 +160,7 @@ export default {
 
     // 用户注册
     addUser() {
+
       const user = {
         username: this.formRegister.username,
         password: this.formRegister.password,
@@ -173,20 +173,25 @@ export default {
             username: user.username.trim(),
             password: user.password,
           };
-          registeUser(data).then((response) => {
-            MessageBox.confirm("确认登录", "注册成功", {
-              confirmButtonText: "确认登陆",
-              cancelButtonText: "取消",
-              type: "warning",
-            })
-              .then(() => {
-                //   store.commit("REMOVE_INFO");
-                this.$router.push("/login");
-              })
-              .catch(() => {
-                this.$router.push("/");
-              });
+          registeUser().then((response) => {
+              
+              this.$router.push("/login");
           });
+
+          //   this.$http
+          // .post("/api/register", formData)
+          // .then((res) => {
+          //   console.dir(res.data);
+          //   if (res.data.error) {
+          //     this.$message.error(res.data.error);
+          //     return false;
+          //   } else {
+          //     this.$router.push("/login");
+          //   }
+          // })
+          // .catch((err) => {
+          //   this.$message.error(`${err.message}`);
+          // });
         } else {
           this.$message.error("表单验证失败!");
           return false;

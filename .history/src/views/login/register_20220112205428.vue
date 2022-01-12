@@ -174,7 +174,7 @@ export default {
             password: user.password,
           };
           registeUser(data).then((response) => {
-            MessageBox.confirm("确认登录", "注册成功", {
+            MessageBox.confirm("注册成功", "确认登陆", {
               confirmButtonText: "确认登陆",
               cancelButtonText: "取消",
               type: "warning",

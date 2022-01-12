@@ -14,7 +14,7 @@
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <i class="el-icon-user"></i>
+           <i class="el-icon-user"></i>
         </span>
         <el-input
           ref="username"
@@ -35,7 +35,7 @@
       >
         <el-form-item prop="password">
           <span class="svg-container">
-            <i class="el-icon-lock"></i>
+             <i class="el-icon-lock"></i>
           </span>
           <el-input
             :key="passwordType"
@@ -52,7 +52,7 @@
             @keyup.enter.native="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
-            <i class="el-icon-view"></i>
+            <i class="view" v-if="passwordType === 'password'"></i>
             <!-- <svg-icon
               :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
             /> -->
@@ -157,12 +157,6 @@ export default {
       } else {
         this.passwordType = "password";
       }
-      //图标显示
-      let e = document.getElementsByClassName("el-icon-view")[0];
-      this.passwordType == ""
-        ? e.setAttribute("style", "color: #409EFF")
-        : e.setAttribute("style", "color: #c0c4cc");
-
       this.$nextTick(() => {
         this.$refs.password.focus();
       });

@@ -52,10 +52,9 @@
             @keyup.enter.native="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
-            <i class="el-icon-view"></i>
-            <!-- <svg-icon
+            <svg-icon
               :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
-            /> -->
+            />
           </span>
         </el-form-item>
       </el-tooltip>

@@ -115,11 +115,11 @@
       @select="handleSelect"
     >
       <i slot="suffix" class="search icon el-input__icon"></i>
-      <template slot-scope="{ item }">
-        <div v-html="item.title" style="text-align:center"></div>
-        <div v-html="item.description"></div>
-        <span class="content" v-html="item.content"></span>
-      </template>
+      <!-- <template slot-scope="{ item }">
+        <div>{{ item.title }}</div>
+        <div>{{ item.description }}</div>
+        <span class="content">{{ item.content }}</span>
+      </template> -->
     </el-autocomplete>
 
     <router-link
@@ -245,6 +245,13 @@ export default {
       //   1000
       // );
     },
+    // getIsPhone() {
+    //   let flag = navigator.userAgent.match(
+    //     /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    //   );
+    //   return flag;
+    // },
+
     querySearchAsync(queryString, callback) {
       if (queryString == null || queryString.trim() === "") {
         return;

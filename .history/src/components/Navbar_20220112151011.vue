@@ -116,9 +116,9 @@
     >
       <i slot="suffix" class="search icon el-input__icon"></i>
       <template slot-scope="{ item }">
-        <div v-html="item.title" style="text-align:center"></div>
-        <div v-html="item.description"></div>
-        <span class="content" v-html="item.content"></span>
+        <div class="title">{{ item.title }}</div>
+        <div class="title">{{ item.description }}</div>
+        <span class="content">{{ item.content }}</span>
       </template>
     </el-autocomplete>
 
@@ -238,15 +238,30 @@ export default {
 
     //查询数据
     debounceQuery(queryString, callback) {
-      this.querySearchAsync(queryString, callback);
-      // this.timer && clearTimeout(this.timer);
-      // this.timer = setTimeout(
-      //   () => this.querySearchAsync(queryString, callback),
-      //   1000
-      // );
+      this.timer && clearTimeout(this.timer);
+      this.timer = setTimeout(
+        () => this.querySearchAsync(queryString, callback),
+        1000
+      );
     },
+    // getIsPhone() {
+    //   let flag = navigator.userAgent.match(
+    //     /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    //   );
+    //   return flag;
+    // },
+
     querySearchAsync(queryString, callback) {
-      if (queryString == null || queryString.trim() === "") {
+      if (
+        queryString == null ||
+        queryString.trim() === "" ||
+        queryString.indexOf("%") !== -1 ||
+        queryString.indexOf("_") !== -1 ||
+        queryString.indexOf("[") !== -1 ||
+        queryString.indexOf("#") !== -1 ||
+        queryString.indexOf("*") !== -1 ||
+        queryString.trim().length > 20
+      ) {
         return;
       }
       let keyWords = { queryString: queryString };
@@ -277,8 +292,7 @@ export default {
     //点击选择时执行的方法
     handleSelect(item) {
       if (item.id) {
-        this.$router.push(`/article/${item.id}`);
-        // this.$router.push(`/blog/${item.id}`);
+        this.$router.push(`/blog/${item.id}`);
       }
     },
     //文章分类跳转
