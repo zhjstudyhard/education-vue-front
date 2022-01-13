@@ -18,12 +18,12 @@
         </el-upload>
       </div>
       <div class="box-center">
-         <div v-if="user.avatar">
+        <div class="user-name text-center">{{ user.username }}</div>
+        <div v-if="user.avatar">
           <el-button type="primary"
             >确认修改头像<i class="el-icon-upload el-icon--right"></i
           ></el-button>
         </div>
-        <!-- <div class="user-name text-center">{{ user.username }}</div> -->
         <div class="user-role text-center text-muted"></div>
       </div>
     </div>

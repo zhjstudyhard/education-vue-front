@@ -16,8 +16,8 @@
           </h2>
 
 
-          <div id="waypoint" class="mini-nav" align="center">
-            <!-- <router-link  class="item el-icon-s-home" to="/">
+          <!-- <div id="waypoint" class="mini-nav" align="center">
+            <router-link  class="item el-icon-s-home" to="/">
               首页
             </router-link>
             <router-link  class="item el-icon-time" to="/archives">
@@ -29,8 +29,8 @@
             </router-link>
             <router-link class="item el-icon-info" to="/about">
               关于我
-            </router-link> -->
-          </div>
+            </router-link>
+          </div> -->
 
           <!-- 向下滚动 -->
           <div class="bounce down"  @click="startRead"  >

@@ -18,13 +18,9 @@
         </el-upload>
       </div>
       <div class="box-center">
-         <div v-if="user.avatar">
-          <el-button type="primary"
-            >确认修改头像<i class="el-icon-upload el-icon--right"></i
-          ></el-button>
+        <div class="user-name text-center">{{ user.username }}</div>
+        <div class="user-role text-center text-muted">
         </div>
-        <!-- <div class="user-name text-center">{{ user.username }}</div> -->
-        <div class="user-role text-center text-muted"></div>
       </div>
     </div>
 
@@ -156,11 +152,12 @@ export default {
   methods: {
     handleAvatarSuccess(res, file) {
       this.user.avatar = URL.createObjectURL(file.raw);
-      console.log("url: ", this.user.avatar);
+      console.log("url: ",this.user.avatar)
     },
     beforeAvatarUpload(file) {
       // const isJPG = file.type === "image/jpeg";
       // const isLt2M = file.size / 1024 / 1024 < 2;
+
       // if (!isJPG) {
       //   this.$message.error("上传头像图片只能是 JPG 格式!");
       // }

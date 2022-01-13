@@ -23,7 +23,7 @@
             >确认修改头像<i class="el-icon-upload el-icon--right"></i
           ></el-button>
         </div>
-        <!-- <div class="user-name text-center">{{ user.username }}</div> -->
+        <div class="user-name text-center">{{ user.username }}</div>
         <div class="user-role text-center text-muted"></div>
       </div>
     </div>

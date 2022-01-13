@@ -8,7 +8,7 @@
       <div class="box-center">
         <el-upload
           class="avatar-uploader"
-          action="http://localhost:8089/api/upload/uploadFile"
+          action="https://jsonplaceholder.typicode.com/posts/"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
@@ -16,15 +16,21 @@
           <img v-if="user.avatar" :src="user.avatar" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
+        <!-- <pan-thumb
+          :image="user.avatar"
+          :height="'100px'"
+          :width="'100px'"
+          :hoverable="false"
+        >
+          <div>Hello</div>
+          {{ user.username }}
+        </pan-thumb> -->
       </div>
       <div class="box-center">
-         <div v-if="user.avatar">
-          <el-button type="primary"
-            >确认修改头像<i class="el-icon-upload el-icon--right"></i
-          ></el-button>
+        <div class="user-name text-center">{{ user.username }}</div>
+        <div class="user-role text-center text-muted">
+          <!-- {{ user.role | uppercaseFirst }} -->
         </div>
-        <!-- <div class="user-name text-center">{{ user.username }}</div> -->
-        <div class="user-role text-center text-muted"></div>
       </div>
     </div>
 
@@ -46,6 +52,14 @@
                 创建时间
                 <div class="user-right">{{ user.gmtCreate }}</div>
               </li>
+              <!-- <li>
+                手机号码
+                <div class="user-right">{{ user.username }}</div>
+              </li>
+              <li>
+                用户邮箱
+                <div class="user-right">{{ user.username }}</div>
+              </li> -->
               <li>
                 安全设置
                 <div class="user-right">
@@ -106,6 +120,20 @@
 import { encrypt } from "../../util/rsaEncrypt";
 import { updatePassword } from "../../api/login/userLogin";
 export default {
+  // components: { PanThumb },
+  // props: {
+  //   user: {
+  //     type: Object,
+  //     default: () => {
+  //       return {
+  //         username: "",
+  //         email: "",
+  //         avatar: "",
+  //         // role: "",
+  //       };
+  //     },
+  //   },
+  // },
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === "") {
@@ -155,12 +183,12 @@ export default {
   },
   methods: {
     handleAvatarSuccess(res, file) {
-      this.user.avatar = URL.createObjectURL(file.raw);
-      console.log("url: ", this.user.avatar);
+      this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
       // const isJPG = file.type === "image/jpeg";
       // const isLt2M = file.size / 1024 / 1024 < 2;
+
       // if (!isJPG) {
       //   this.$message.error("上传头像图片只能是 JPG 格式!");
       // }
