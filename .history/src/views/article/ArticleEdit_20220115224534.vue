@@ -248,7 +248,7 @@ export default {
             arr.push($(this).attr("src"));
           });
           var imgFiles = [...new Set(arr)]
-         
+          console.log("arr: ",imgFiles)
           if (_this.ruleForm.id == "") {
             addArticle(this.ruleForm).then((response) => {
               _this.$alert("添加成功", "提示", {

@@ -29,7 +29,7 @@ axios.interceptors.request.use(config => {
     // }
     const token = sessionStorage.getItem('token')
     if (token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
-        config.headers['Authorization'] = token
+        config.headers.Authorization = token;
     }
 
     return config

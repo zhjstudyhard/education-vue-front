@@ -43,13 +43,12 @@
             v-model="ruleForm.content"
             @imgAdd="imgAdd"
             @imgDel="imgDel"
-            @change="change"
           ></mavon-editor>
         </el-form-item>
         <!--分类-->
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="分类" prop="type">
+            <el-form-item label="分类" prop="cate" :required="true">
               <el-select
                 v-model="ruleForm.type"
                 placeholder="请选择分类（输入可添加新分类）"
@@ -139,9 +138,8 @@ export default {
   // name: "BlogEdit",
   data() {
     return {
-      html: "",
       types: {},
-      fileIds: [],
+      imgFiles: [],
       ruleForm: {
         id: "",
         title: "",
@@ -152,7 +150,6 @@ export default {
         words: null,
         views: 0,
         status: 0,
-        fileIds: "",
       },
       rules: {
         title: [
@@ -168,7 +165,6 @@ export default {
           { required: true, message: "请输入摘要", trigger: "blur" },
         ],
         content: [{ required: true, message: "请输入内容", trigger: "blur" }],
-        type: [{ required: true, message: "请选择分类", trigger: "blur" }],
         words: [
           { required: true, message: "请输入文章字数", trigger: "change" },
         ],
@@ -181,28 +177,22 @@ export default {
   },
   methods: {
     imgAdd(pos, $file) {
+      console.log("pos: ", pos);
       let formdata = new FormData();
       formdata.append("file", $file);
-
       uploadFile(formdata).then((response) => {
-        // console.log("file: ", response);
-        //  this.imgFiles[pos] = $file;
-        this.fileIds[pos] = response.data.id;
+        console.log("file: ", response);
+        this.imgFiles[pos] = response.data.id;
         this.$refs.md.$img2Url(pos, response.data.filePath);
       });
 
       // console.log("formate4 " + $file.miniurl);
     },
-    imgDel(pos, $file) {
-      console.log("图片删除: ", pos[0].substring(37));
-      this.fileIds.splice(this.fileIds.indexOf(pos[0].substring(37)), 1);
-      // console.log("imgs: ", this.imgFiles);
-    },
-    // 所有操作都会被解析重新渲染
-    change(value, render) {
-      console.log("输入框改变: ", render);
-      // render 为 markdown 解析后的结果[html]
-      this.html = render;
+    imgDel(pos) {
+      console.log("图片删除");
+      var imgs = this.imgFiles.splice(pos - 1, 1);
+      // delete this.imgFiles[pos];
+      console.log("imgs: ", imgs);
     },
     //通过id获取文章
     init() {
@@ -237,18 +227,6 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const _this = this;
-          //上传图片id
-          this.fileIds = this.fileIds.filter(function (e) {
-            return e;
-          });
-          this.ruleForm.fileIds = this.fileIds.toString(",");
-          //所有的图片URL
-          var arr = [];
-          $("img").each(function () {
-            arr.push($(this).attr("src"));
-          });
-          var imgFiles = [...new Set(arr)]
-         
           if (_this.ruleForm.id == "") {
             addArticle(this.ruleForm).then((response) => {
               _this.$alert("添加成功", "提示", {

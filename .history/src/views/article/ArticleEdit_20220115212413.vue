@@ -43,7 +43,6 @@
             v-model="ruleForm.content"
             @imgAdd="imgAdd"
             @imgDel="imgDel"
-            @change="change"
           ></mavon-editor>
         </el-form-item>
         <!--分类-->
@@ -139,7 +138,6 @@ export default {
   // name: "BlogEdit",
   data() {
     return {
-      html: "",
       types: {},
       fileIds: [],
       ruleForm: {
@@ -152,7 +150,7 @@ export default {
         words: null,
         views: 0,
         status: 0,
-        fileIds: "",
+        fileIds:""
       },
       rules: {
         title: [
@@ -183,26 +181,20 @@ export default {
     imgAdd(pos, $file) {
       let formdata = new FormData();
       formdata.append("file", $file);
-
+      
       uploadFile(formdata).then((response) => {
         // console.log("file: ", response);
         //  this.imgFiles[pos] = $file;
-        this.fileIds[pos] = response.data.id;
+        this.fileIds = response.data.id;
         this.$refs.md.$img2Url(pos, response.data.filePath);
       });
 
       // console.log("formate4 " + $file.miniurl);
     },
     imgDel(pos, $file) {
-      console.log("图片删除: ", pos[0].substring(37));
-      this.fileIds.splice(this.fileIds.indexOf(pos[0].substring(37)), 1);
+      // console.log("图片删除: ",pos[0].substring(37));
+      this.fileIds.splice(this.fileIds.indexOf(pos[0].substring(37)),1);
       // console.log("imgs: ", this.imgFiles);
-    },
-    // 所有操作都会被解析重新渲染
-    change(value, render) {
-      console.log("输入框改变: ", render);
-      // render 为 markdown 解析后的结果[html]
-      this.html = render;
     },
     //通过id获取文章
     init() {
@@ -237,18 +229,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const _this = this;
-          //上传图片id
-          this.fileIds = this.fileIds.filter(function (e) {
-            return e;
-          });
-          this.ruleForm.fileIds = this.fileIds.toString(",");
-          //所有的图片URL
-          var arr = [];
-          $("img").each(function () {
-            arr.push($(this).attr("src"));
-          });
-          var imgFiles = [...new Set(arr)]
-         
+          this.ruleForm.fileIds = this.fileIds.toString(',')
           if (_this.ruleForm.id == "") {
             addArticle(this.ruleForm).then((response) => {
               _this.$alert("添加成功", "提示", {

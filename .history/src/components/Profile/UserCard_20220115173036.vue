@@ -157,7 +157,7 @@ export default {
   created() {
     if (sessionStorage.getItem("userInfo")) {
       let userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-      // this.user.avatar = userInfo.avatar;
+      this.user.avatar = userInfo.avatar;
       this.user = userInfo.user;
     }
   },

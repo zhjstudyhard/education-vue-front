@@ -139,7 +139,7 @@ export default {
   // name: "BlogEdit",
   data() {
     return {
-      html: "",
+      html:"",
       types: {},
       fileIds: [],
       ruleForm: {
@@ -200,7 +200,7 @@ export default {
     },
     // 所有操作都会被解析重新渲染
     change(value, render) {
-      console.log("输入框改变: ", render);
+       console.log("输入框改变");
       // render 为 markdown 解析后的结果[html]
       this.html = render;
     },
@@ -237,18 +237,11 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const _this = this;
-          //上传图片id
+          console.log("ids: ", this.fileIds);
           this.fileIds = this.fileIds.filter(function (e) {
             return e;
           });
           this.ruleForm.fileIds = this.fileIds.toString(",");
-          //所有的图片URL
-          var arr = [];
-          $("img").each(function () {
-            arr.push($(this).attr("src"));
-          });
-          var imgFiles = [...new Set(arr)]
-         
           if (_this.ruleForm.id == "") {
             addArticle(this.ruleForm).then((response) => {
               _this.$alert("添加成功", "提示", {

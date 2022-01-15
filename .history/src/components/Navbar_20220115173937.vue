@@ -151,7 +151,7 @@
       <!-- <el-container v-if="isShow"> -->
       <el-header>
         <div class="header-avatar">
-          <el-avatar size="medium" :src="user.avatar"></el-avatar>
+          <el-avatar size="medium" :src="avatar"></el-avatar>
           <el-dropdown>
             <div style="margin-top: 5px">
               <span class="el-dropdown-link" style="color: white">

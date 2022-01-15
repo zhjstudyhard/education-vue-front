@@ -19,11 +19,11 @@
               >
                 <div class="left-box">
                   <!-- <a class="avatar"> </a> -->
-                  <el-avatar class="avatar"
+                  <el-avatar
                     shape="square"
                     :size="60"
                     fit="contain"
-                    :src="message.avatar"
+                    :src="scope.row.avatar"
                   ></el-avatar>
                 </div>
                 <div class="center-box">

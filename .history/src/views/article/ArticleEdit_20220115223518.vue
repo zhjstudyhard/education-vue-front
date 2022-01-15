@@ -237,18 +237,16 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const _this = this;
-          //上传图片id
+          console.log("ids: ", this.fileIds);
           this.fileIds = this.fileIds.filter(function (e) {
             return e;
           });
           this.ruleForm.fileIds = this.fileIds.toString(",");
-          //所有的图片URL
           var arr = [];
-          $("img").each(function () {
+          $("#this.html img").each(function () {
             arr.push($(this).attr("src"));
           });
-          var imgFiles = [...new Set(arr)]
-         
+          console.log("arr: ",arr)
           if (_this.ruleForm.id == "") {
             addArticle(this.ruleForm).then((response) => {
               _this.$alert("添加成功", "提示", {

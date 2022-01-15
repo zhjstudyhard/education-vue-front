@@ -20,7 +20,7 @@
       </div>
       <div class="box-center">
         <div v-if="user.avatar">
-          <el-button type="primary" @click="updateAvatar"
+          <el-button type="primary"
             >确认修改头像<i class="el-icon-upload el-icon--right"></i
           ></el-button>
         </div>
@@ -103,8 +103,9 @@
 </template>
 
 <script>
+// import PanThumb from "@/components/PanThumb";
 import { encrypt } from "../../util/rsaEncrypt";
-import { updatePassword, updateAvatar } from "../../api/login/userLogin";
+import { updatePassword } from "../../api/login/userLogin";
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -121,7 +122,6 @@ export default {
         username: "",
         avatar: "",
       },
-      fileId: "",
       passForm: {
         oldPassword: "",
         newPassword: "",
@@ -148,35 +148,23 @@ export default {
     };
   },
   computed: {
-    header() {
+    headers() {
       return {
-        Authorization: sessionStorage.getItem("token"),
+        Authorization: store.getters.access_token,
       };
     },
   },
   created() {
     if (sessionStorage.getItem("userInfo")) {
       let userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-      // this.user.avatar = userInfo.avatar;
+      this.user.avatar = userInfo.avatar;
       this.user = userInfo.user;
     }
   },
   methods: {
-    updateAvatar() {
-      let data = { fileId: this.fileId };
-      updateAvatar(data).then((response) => {
-        this.$message({
-          showClose: true,
-          message: "修改成功",
-          type: "success",
-        });
-      });
-    },
     handleAvatarSuccess(res, file) {
-      this.user.avatar = res.data.data.filePath;
-      // this.user.avatar = URL.createObjectURL(file.raw);
-      this.fileId = res.data.data.id;
-      // console.log("url: ", res);
+      this.user.avatar = URL.createObjectURL(file.raw);
+      console.log("url: ", this.user.avatar);
     },
     beforeAvatarUpload(file) {
       // const isJPG = file.type === "image/jpeg";

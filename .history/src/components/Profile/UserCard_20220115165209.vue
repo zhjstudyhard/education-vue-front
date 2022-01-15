@@ -20,8 +20,7 @@
       </div>
       <div class="box-center">
         <div v-if="user.avatar">
-          <el-button type="primary" @click="updateAvatar"
-            >确认修改头像<i class="el-icon-upload el-icon--right"></i
+          <el-button type="primary" @click="updateAvatar">确认修改头像<i class="el-icon-upload el-icon--right"></i
           ></el-button>
         </div>
         <!-- <div class="user-name text-center">{{ user.username }}</div> -->
@@ -157,26 +156,24 @@ export default {
   created() {
     if (sessionStorage.getItem("userInfo")) {
       let userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-      // this.user.avatar = userInfo.avatar;
+      this.user.avatar = userInfo.avatar;
       this.user = userInfo.user;
     }
   },
   methods: {
     updateAvatar() {
-      let data = { fileId: this.fileId };
-      updateAvatar(data).then((response) => {
+      updateAvatar(this.fileId).then((response) => {
         this.$message({
           showClose: true,
-          message: "修改成功",
-          type: "success",
+          message: '修改成功',
+          type: 'success'
         });
       });
     },
     handleAvatarSuccess(res, file) {
-      this.user.avatar = res.data.data.filePath;
-      // this.user.avatar = URL.createObjectURL(file.raw);
-      this.fileId = res.data.data.id;
-      // console.log("url: ", res);
+      this.user.avatar = URL.createObjectURL(file.raw);
+      this.fileId = res.data.data;
+      // console.log("url: ", this.fileId);
     },
     beforeAvatarUpload(file) {
       // const isJPG = file.type === "image/jpeg";
