@@ -200,7 +200,7 @@ export default {
     },
     // 所有操作都会被解析重新渲染
     change(value, render) {
-      console.log("输入框改变: ", render);
+      // console.log("输入框改变: ", render);
       // render 为 markdown 解析后的结果[html]
       this.html = render;
     },
@@ -248,11 +248,6 @@ export default {
             arr.push($(this).attr("src"));
           });
           var imgFiles = [...new Set(arr)];
-          imgFiles = imgFiles.filter(function (e) {
-            if (e.length <= 60) {
-              return e;
-            }
-          });
           this.ruleForm.filePaths = imgFiles.toString(",");
           // console.log("fileIDs: ",this.ruleForm.fileIds)
           if (_this.ruleForm.id == "") {

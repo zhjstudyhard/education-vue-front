@@ -248,12 +248,14 @@ export default {
             arr.push($(this).attr("src"));
           });
           var imgFiles = [...new Set(arr)];
-          imgFiles = imgFiles.filter(function (e) {
+          this.ruleForm.filePaths = imgFiles.toString(",");
+          this.ruleForm.filePaths = this.ruleForm.filePaths.filter(function (
+            e
+          ) {
             if (e.length <= 60) {
               return e;
             }
           });
-          this.ruleForm.filePaths = imgFiles.toString(",");
           // console.log("fileIDs: ",this.ruleForm.fileIds)
           if (_this.ruleForm.id == "") {
             addArticle(this.ruleForm).then((response) => {

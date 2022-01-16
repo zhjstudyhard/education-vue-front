@@ -135,13 +135,14 @@ import {
   updateArticle,
 } from "../../api/article/article";
 import { uploadFile } from "../../api/article/uploadFile";
+import { config } from 'vue/types/umd';
 export default {
   // name: "BlogEdit",
   data() {
     return {
       html: "",
       types: {},
-      // fileIds: [],
+      fileIds: [],
       ruleForm: {
         id: "",
         title: "",
@@ -152,7 +153,7 @@ export default {
         words: null,
         views: 0,
         status: 0,
-        filePaths: "",
+        fileIds: "",
       },
       rules: {
         title: [
@@ -187,14 +188,13 @@ export default {
       uploadFile(formdata).then((response) => {
         // console.log("file: ", response);
         //  this.imgFiles[pos] = $file;
-        // this.fileIds[pos] = response.data.id;
+        this.fileIds[pos] = response.data.id;
         this.$refs.md.$img2Url(pos, response.data.filePath);
       });
 
-      // console.log("formate4 " + $file.miniurl);
     },
     imgDel(pos, $file) {
-      // console.log("图片删除: ", pos[0].substring(37));
+      console.log("图片删除: ", pos[0].substring(37));
       this.fileIds.splice(this.fileIds.indexOf(pos[0].substring(37)), 1);
       // console.log("imgs: ", this.imgFiles);
     },
@@ -237,7 +237,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const _this = this;
-          //上传图片id
+          // //上传图片id
           // this.fileIds = this.fileIds.filter(function (e) {
           //   return e;
           // });
@@ -247,14 +247,9 @@ export default {
           $("img").each(function () {
             arr.push($(this).attr("src"));
           });
-          var imgFiles = [...new Set(arr)];
-          imgFiles = imgFiles.filter(function (e) {
-            if (e.length <= 60) {
-              return e;
-            }
-          });
-          this.ruleForm.filePaths = imgFiles.toString(",");
-          // console.log("fileIDs: ",this.ruleForm.fileIds)
+          var imgFiles = [...new Set(arr)]
+          // this.fileIds = imgFiles.toString(",");
+          console.log("fileIds: ",this.fileIds)
           if (_this.ruleForm.id == "") {
             addArticle(this.ruleForm).then((response) => {
               _this.$alert("添加成功", "提示", {
