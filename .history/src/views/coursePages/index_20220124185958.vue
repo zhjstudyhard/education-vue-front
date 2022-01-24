@@ -1,0 +1,205 @@
+<template>
+  <div class="index_bgf9">
+    <!-- 网校课程 开始 -->
+    <div class="index_title">
+      <h2>热门课程</h2>
+    </div>
+    <div class="main">
+      <div class="index_video">
+        <div class="bd">
+          <ul>
+            <li v-for="course in eduList" :key="course.id">
+              <div class="img">
+                <img :src="course.cover" />
+              </div>
+              <div class="t">
+                <h4>{{ course.title }}</h4>
+                <p>
+                  <span>
+                    查看详情
+                  </span>
+                  <i>9634人学习</i>
+                  <i>9634评论</i>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 网校名师 开始 -->
+        <!-- 网校课程 开始 -->
+    <div class="index_title">
+      <h2>名师大咖</h2>
+    </div>
+    <div class="main">
+      <div class="index_video">
+        <div class="bd">
+          <ul>
+            <li v-for="course in eduList" :key="course.id">
+              <div class="img">
+                <img :src="course.cover" />
+              </div>
+              <div class="t">
+                <h4>{{ course.title }}</h4>
+                <p>
+                  <span>
+                    查看详情
+                  </span>
+                  <i>9634人学习</i>
+                  <i>9634评论</i>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- <div>
+      <section class="container">
+        <header class="comm-title">
+          <h2 class="tac">
+            <span class="c-333">名师大咖</span>
+          </h2>
+        </header>
+        <div>
+          <article class="i-teacher-list">
+            <ul class="of">
+              <li v-for="teacher in teacherList" :key="teacher.id">
+                <section class="i-teach-wrap">
+                  <div class="i-teach-pic">
+                    <a href="/teacher/1" :title="teacher.name">
+                      <img :alt="teacher.name" :src="teacher.avatar" />
+                    </a>
+                  </div>
+                  <div class="mt10 hLh30 txtOf tac">
+                    <a
+                      href="/teacher/1"
+                      :title="teacher.name"
+                      class="fsize18 c-666"
+                      >{{ teacher.name }}</a
+                    >
+                  </div>
+                  <div class="hLh30 txtOf tac">
+                    <span class="fsize14 c-999">{{ teacher.career }}</span>
+                  </div>
+                  <div class="mt15 i-q-txt">
+                    <p class="c-999 f-fA">{{ teacher.intro }}</p>
+                  </div>
+                </section>
+              </li>
+            </ul>
+            <div class="clear"></div>
+          </article>
+          <section class="tac pt20">
+            <a href="#" title="全部讲师" class="comm-btn c-btn-2">全部讲师</a>
+          </section>
+        </div>
+      </section>
+    </div> -->
+    <!-- /网校名师 结束 -->
+  </div>
+</template>
+
+<script>
+// import banner from "@/api/banner";
+import { getIndexData } from "@/api/index/index";
+
+export default {
+  data() {
+    return {
+      swiperOption: {
+        //配置分页
+        pagination: {
+          el: ".swiper-pagination", //分页的dom节点
+        },
+        //配置导航
+        navigation: {
+          nextEl: ".swiper-button-next", //下一页dom节点
+          prevEl: ".swiper-button-prev", //前一页dom节点
+        },
+      },
+      //banner数组
+      bannerList: [],
+      eduList: [],
+      teacherList: [],
+    };
+  },
+  created() {
+    // //调用查询banner的方法
+    // this.getBannerList();
+    //调用查询热门课程和名师的方法
+    this.getHotCourseTeacher();
+  },
+  methods: {
+    //查询热门课程和名师
+    getHotCourseTeacher() {
+      getIndexData().then((response) => {
+        //  console.log("edu: ",response)
+        this.eduList = response.eduList;
+        this.teacherList = response.teacherList;
+      });
+    },
+    // //查询banner数据
+    // getBannerList() {
+    //   banner.getListBanner().then((response) => {
+    //     this.bannerList = response.data.data.list;
+    //   });
+    // },
+  },
+};
+</script>
+<style scoped>
+.index_bgf9 {
+  background: #f9fbff;
+  position: relative;
+}
+.index_title {
+  padding: 55px 0 20px;
+  text-align: center;
+}
+.main {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.index_video .bd ul {
+  position: relative;
+  width: 1220px;
+}
+ul,
+li,
+dl,
+dt,
+dd {
+  list-style: none;
+}
+.index_video .bd ul li .img {
+  position: relative;
+  width: 224px;
+  height: 148px;
+}
+.index_video .bd ul li .img img {
+  width: 224px;
+  border-radius: 10px;
+  height: 148px;
+}
+img {
+  border: none;
+}
+.index_video .bd ul li .t p {
+  padding-top: 10px;
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+}
+.index_video .bd ul li {
+  width: 224px;
+  float: left;
+  margin: 20px 20px 10px 0;
+}
+.index_video .bd ul li .t p span {
+    float: left;
+}
+</style>

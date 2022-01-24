@@ -94,7 +94,7 @@
         text-decoration-line: none;
         color: white;
         padding: 15px;
-        margin-left: 890px;
+        margin-left: 970px;
       "
       to="/login"
     >

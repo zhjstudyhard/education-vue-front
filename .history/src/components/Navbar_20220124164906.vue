@@ -28,7 +28,7 @@
       }"
       class="item"
       style="text-decoration-line: none; color: white; padding: 20px"
-      to="/courseIndex"
+      to="/"
     >
       课程
     </router-link>
@@ -68,6 +68,50 @@
         消息
       </el-badge>
     </div>
+    <!-- <router-link
+      :class="{
+        'm-mobile-show': mobileHide,
+        active: $route.name === '消息通知',
+      }"
+      class="item"
+      style="text-decoration-line: none; color: white; padding: 20px"
+      to="/messageList"
+    >
+      <el-badge :value="messageCount" class="item" :hidden="hiddenBadge">
+        消息
+      </el-badge>
+    </router-link> -->
+    <!-- <router-link
+      :class="{
+        'm-mobile-show': mobileHide,
+        active: $route.name === 'Archives',
+      }"
+      class="item"
+      style="text-decoration-line: none; color: white; padding: 20px"
+      to="/archives"
+    >
+      归档
+    </router-link>
+
+    <router-link
+      :class="{
+        'm-mobile-show': mobileHide,
+        active: $route.name === 'Friends',
+      }"
+      class="item"
+      style="text-decoration-line: none; color: white; padding: 20px"
+      to="/friends"
+    >
+      友链
+    </router-link>
+    <router-link
+      :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'About' }"
+      class="item"
+      style="text-decoration-line: none; color: white; padding: 20px"
+      to="/about"
+    >
+      关于我
+    </router-link> -->
 
     <!--自带防抖-->
     <el-autocomplete
@@ -94,7 +138,7 @@
         text-decoration-line: none;
         color: white;
         padding: 15px;
-        margin-left: 890px;
+        margin-left: 970px;
       "
       to="/login"
     >

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-18 17:21:59
- * @LastEditTime: 2022-01-24 16:52:36
+ * @LastEditTime: 2022-01-24 16:50:04
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \education-vue-front\src\router\index.js
@@ -59,30 +59,30 @@ const routes = [{
                     title: '查看文章'
                 }
             },
-            // {
-            //     path: '/archives',
-            //     name: 'Archives',
-            //     component: Archives,
-            //     meta: {
-            //         title: '归档'
-            //     }
-            // },
-            // {
-            //     path: '/about',
-            //     name: 'About',
-            //     component: About,
-            //     meta: {
-            //         title: '关于我'
-            //     }
-            // },
-            // {
-            //     path: '/friends',
-            //     name: 'Friends',
-            //     component: Friends,
-            //     meat: {
-            //         title: '友链'
-            //     }
-            // },
+            {
+                path: '/archives',
+                name: 'Archives',
+                component: Archives,
+                meta: {
+                    title: '归档'
+                }
+            },
+            {
+                path: '/about',
+                name: 'About',
+                component: About,
+                meta: {
+                    title: '关于我'
+                }
+            },
+            {
+                path: '/friends',
+                name: 'Friends',
+                component: Friends,
+                meat: {
+                    title: '友链'
+                }
+            },
             {
                 path: '/category/:type',
                 name: 'Category',
@@ -125,14 +125,6 @@ const routes = [{
             title: 'Profile',
             icon: 'user',
             noCache: true
-        }
-    },
-    {
-        path: '/courseIndex',
-        name: '课程界面',
-        component: () => import('../views/coursePages/index'),
-        meta: {
-            title: '课程界面'
         }
     }
 ];
