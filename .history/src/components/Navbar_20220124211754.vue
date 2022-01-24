@@ -14,15 +14,20 @@
     </router-link>
 
     <router-link
+      :class="{ 'm-mobile-show': mobileHide, active: $route.name === 'Index' }"
       class="item"
-      style="text-decoration-line: none; color: white; padding: 20px;font-size: 16px;"
+      style="text-decoration-line: none; color: white; padding: 20px"
       to="/"
     >
       首页
     </router-link>
     <router-link
+      :class="{
+        'm-mobile-show': mobileHide,
+        active: $route.name === 'Index',
+      }"
       class="item"
-      style="text-decoration-line: none; color: white; padding: 20px;font-size: 16px;"
+      style="text-decoration-line: none; color: white; padding: 20px"
       to="/courseIndex"
     >
       课程
@@ -33,7 +38,7 @@
         style="
           text-decoration-line: none;
           color: white;
-          font-size: 16px;
+          font-size: 20px;
           padding: 20px;
         "
       >
@@ -58,7 +63,7 @@
       </el-dropdown-menu>
     </el-dropdown>
 
-    <div class="message" @click="queryClick" style="cursor: pointer;font-size: 16px;">
+    <div class="message" @click="queryClick" style="cursor: pointer">
       <el-badge :value="messageCount" class="item" :hidden="hiddenBadge">
         消息
       </el-badge>
@@ -90,7 +95,6 @@
         color: white;
         padding: 15px;
         margin-left: 890px;
-        font-size: 16px;
       "
       to="/login"
     >
@@ -104,7 +108,6 @@
         color: white;
         center
         margin-left: 1350px;
-        font-size: 16px;
       "
       to="/register"
     >

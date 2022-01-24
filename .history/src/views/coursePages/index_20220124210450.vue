@@ -1,11 +1,6 @@
 <template>
   <div>
-    <!--顶部导航栏-->
-    <Navbar
-      class="navbar"
-      id="nav"
-      v-show="$route.name !== 'Home' || this.focusMode"
-    ></Navbar>
+
     <div id="aCoursesList">
       <!-- 网校课程 开始 -->
       <div>
@@ -115,12 +110,9 @@
 
 <script>
 // import banner from '@/api/banner'
-import { getIndexData } from "@/api/index/index";
-import Navbar from "../../components/Navbar";
+// import index from '@/api/index'
+
 export default {
-  components: {
-    Navbar,
-  },
   data() {
     return {
       swiperOption: {
@@ -143,15 +135,15 @@ export default {
   created() {
     // //调用查询banner的方法
     // this.getBannerList()
-    //调用查询热门课程和名师的方法
-    this.getHotCourseTeacher();
+    // //调用查询热门课程和名师的方法
+    // this.getHotCourseTeacher()
   },
   methods: {
     //查询热门课程和名师
     getHotCourseTeacher() {
-      getIndexData().then((response) => {
-        this.eduList = response.eduList;
-        this.teacherList = response.teacherList;
+      index.getIndexData().then((response) => {
+        this.eduList = response.data.data.eduList;
+        this.teacherList = response.data.data.teacherList;
       });
     },
     // //查询banner数据

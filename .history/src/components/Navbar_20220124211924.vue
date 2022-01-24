@@ -45,7 +45,7 @@
 
       <el-dropdown-menu
         slot="dropdown"
-        style="background-color: #333333; padding: 20px"
+        style="background-color: #333333; padding: 20px;font-size: 16px;"
       >
         <el-dropdown-item
           v-for="(type, index) in types"
@@ -58,7 +58,7 @@
       </el-dropdown-menu>
     </el-dropdown>
 
-    <div class="message" @click="queryClick" style="cursor: pointer;font-size: 16px;">
+    <div class="message" @click="queryClick" style="cursor: pointer">
       <el-badge :value="messageCount" class="item" :hidden="hiddenBadge">
         消息
       </el-badge>
@@ -90,7 +90,6 @@
         color: white;
         padding: 15px;
         margin-left: 890px;
-        font-size: 16px;
       "
       to="/login"
     >
@@ -104,7 +103,6 @@
         color: white;
         center
         margin-left: 1350px;
-        font-size: 16px;
       "
       to="/register"
     >

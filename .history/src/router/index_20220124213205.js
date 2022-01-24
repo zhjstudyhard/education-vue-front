@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-18 17:21:59
- * @LastEditTime: 2021-12-25 20:17:48
+ * @LastEditTime: 2022-01-24 21:31:35
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \education-vue-front\src\router\index.js
@@ -18,8 +18,7 @@ import Category from "../views/Category";
 
 
 Vue.use(VueRouter)
-const routes = [
-    {
+const routes = [{
         path: '/login',
         name: '登录',
         component: () => import('../views/login/login'),
@@ -36,7 +35,7 @@ const routes = [
         }
     },
 
-    
+
     {
         path: '/',
         name: 'Index',
@@ -44,8 +43,7 @@ const routes = [
         // 懒加载
         component: () => import('../views/Index.vue'),
         redirect: 'Home',
-        children: [
-            {
+        children: [{
                 path: '',
                 name: 'Home',
                 component: Home,
@@ -61,30 +59,7 @@ const routes = [
                     title: '查看文章'
                 }
             },
-            {
-                path: '/archives',
-                name: 'Archives',
-                component: Archives,
-                meta: {
-                    title: '归档'
-                }
-            },
-            {
-                path: '/about',
-                name: 'About',
-                component: About,
-                meta: {
-                    title: '关于我'
-                }
-            },
-            {
-                path: '/friends',
-                name: 'Friends',
-                component: Friends,
-                meat: {
-                    title: '友链'
-                }
-            },
+
             {
                 path: '/category/:type',
                 name: 'Category',
@@ -98,18 +73,71 @@ const routes = [
     {
         path: '/writeArticle',
         name: 'writeArticle',
-        component: () => import('../views/article/article'),
+        component: () => import('../views/article/ArticleEdit'),
         meta: {
-            title: '分类'
+            title: '发表文章'
         }
     },
+    {
+        path: '/articleEdit/:id',
+        component: () => import('../views/article/ArticleEdit'),
+        name: '文章编辑',
+        meta: {
+            title: '文章编辑'
+        },
+    },
+    {
+        path: '/messageList',
+        component: () => import('../views/article/MessageList'),
+        name: '消息通知',
+        meta: {
+            title: '消息通知'
+        },
+    },
+    {
+        path: '/profile/index',
+        component: () => import('../components/profile/index'),
+        name: 'Profile',
+        meta: {
+            title: 'Profile',
+            icon: 'user',
+            noCache: true
+        }
+    },
+    {
+        path: '/courseIndex',
+        name: '课程界面',
+        component: () => import('../views/coursePages/index'),
+        meta: {
+            title: '课程界面'
+        },
+        children: [{
+                path: '/teacher/:id',
+                name: '讲师信息',
+                component: import('../views/coursePages/teacher/_id'),
+                meta: {
+                    title: '讲师信息'
+                }
+            },
+
+        ]
+    }
 ];
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return {
+                x: 0,
+                y: 0
+            }
+        }
+    }
 })
 
 export default router
-

@@ -111,24 +111,24 @@ const routes = [{
             meta: {
                 title: '课程界面'
             },
-            // children: [{
-            //         path: '/teacher/:id',
-            //         name: '讲师信息',
-            //         component: import('../views/coursePages/teacher/_id'),
-            //         meta: {
-            //             title: '讲师信息'
-            //         }
-            //     },
-            // ]
-            }, 
-            {
-                path: '/teacher/:id',
-                name: '课程界面',
-                component: () => import('../views/coursePages/teacher/_id'),
-                meta: {
-                    title: '课程界面'
+            children: [{
+                    path: '/teacher/:id',
+                    name: '讲师信息',
+                    component: import('../views/coursePages/teacher/_id'),
+                    meta: {
+                        title: '讲师信息'
+                    }
                 },
-            }
+            ]
+            }, 
+            // {
+            //     path: '/teacher/:id',
+            //     name: '课程界面',
+            //     component: () => import('../views/coursePages/teacher/_id'),
+            //     meta: {
+            //         title: '课程界面'
+            //     },
+            // }
 
         ];
 

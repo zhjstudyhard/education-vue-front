@@ -116,11 +116,8 @@
 <script>
 // import banner from '@/api/banner'
 import { getIndexData } from "@/api/index/index";
-import Navbar from "../../components/Navbar";
+
 export default {
-  components: {
-    Navbar,
-  },
   data() {
     return {
       swiperOption: {

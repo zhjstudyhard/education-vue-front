@@ -144,7 +144,7 @@ import '~/assets/css/swiper-3.3.1.min.css'
 import "~/assets/css/pages-weixinpay.css"
 
 import cookie from 'js-cookie'
-// import loginApi from '@/api/login'
+import loginApi from '@/api/login'
 
 export default {
   data() {
