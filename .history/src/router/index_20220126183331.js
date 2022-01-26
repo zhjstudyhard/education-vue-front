@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-18 17:21:59
- * @LastEditTime: 2022-01-26 18:36:16
+ * @LastEditTime: 2022-01-26 18:33:11
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \education-vue-front\src\router\index.js
@@ -147,7 +147,7 @@ const routes = [{
     {
         path: '/video/:id',
         name: '视频播放',
-        component: () => import('../views/player/_vid.vue'),
+        component: () => import('../views/player/_vid'),
         meta: {
             title: '视频播放'
         },

@@ -31,7 +31,7 @@
             </section>
             <section class="c-attr-mt of"></section>
             <section class="c-attr-mt">
-              <a :href="'/video/' + course.chapterVos[0].children[0].videoSourceId" target="_blank" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+              <a href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
             </section>
           </section>
         </aside>
@@ -100,8 +100,7 @@
                             </a>
                             <ol class="lh-menu-ol" style="display: block" v-for="video in chapter.children" :key="video.id">
                               <li class="lh-menu-second ml30">
-
-                                <a :href="'/video/' + video.videoSourceId" target="_blank">
+                                <a href="#" title>
                                   <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em
                                   >{{video.title}}
                                 </a>

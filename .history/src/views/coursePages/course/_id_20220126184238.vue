@@ -31,7 +31,7 @@
             </section>
             <section class="c-attr-mt of"></section>
             <section class="c-attr-mt">
-              <a :href="'/video/' + course.chapterVos[0].children[0].videoSourceId" target="_blank" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+              <a href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
             </section>
           </section>
         </aside>

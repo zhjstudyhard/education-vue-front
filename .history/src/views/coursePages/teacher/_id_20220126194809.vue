@@ -65,9 +65,9 @@
                     <img :src="course.cover" class="img-responsive" />
                     <div class="cc-mask">
                       <a
-                        :href="'/course/' + course.id"
+                        :href="'/course/' + item.id"
                         title="开始学习"
-                       
+                        target="_blank"
                         class="comm-btn c-btn-1"
                         >开始学习</a
                       >
@@ -75,7 +75,7 @@
                   </section>
                   <h3 class="hLh30 txtOf mt10">
                     <router-link
-                      :to="'/course/' + course.id"
+                      :to="'/teacher/' + course.id"
                       class="course-title fsize18 c-333"
                     >
                       {{ course.title }}

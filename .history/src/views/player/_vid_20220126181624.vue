@@ -1,0 +1,94 @@
+<template>
+  <div>
+    <!-- 阿里云视频播放器样式 -->
+    <link
+      rel="stylesheet"
+      href="https://g.alicdn.com/de/prismplayer/2.8.1/skins/default/aliplayer-min.css"
+    />
+    <!-- 阿里云视频播放器脚本 -->
+    <!-- <script charset="utf-8" type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.8.1/aliplayer-min.js" /> -->
+    <!-- 定义播放器dom -->
+    <div id="J_prismPlayer" class="prism-player" />
+  </div>
+</template>
+ <!-- 阿里云视频播放器脚本 -->
+<script type="text/javascript" src="//g.alicdn.com/de/prismplayer/2.6.0/aliplayer-min.js"></script>
+<script>
+import { getVideoPlayAuth } from "@/api/index/course";
+export default {
+  layout: "video", //应用video布局
+  created() {
+    if (this.$route.params && this.$route.params.id) {
+      let data = { videoSourceId: this.$route.params.id };
+      return getVideoPlayAuth(data).then((response) => {
+        console.log("play: ", response.data);
+        return {
+          playAuth: response.data.data.playAuth,
+          vid: this.$route.params.id,
+        };
+      });
+    }
+
+    //页面渲染之后  created
+    new Aliplayer(
+      {
+        id: "J_prismPlayer",
+        vid: this.vid, // 视频id
+        playauth: this.playAuth, // 播放凭证
+        encryptType: "1", // 如果播放加密视频，则需设置encryptType=1，非加密视频无需设置此项
+        width: "100%",
+        height: "500px",
+        // 以下可选设置
+        cover: "http://guli.shop/photo/banner/1525939573202.jpg", // 封面
+        qualitySort: "asc", // 清晰度排序
+        mediaType: "video", // 返回音频还是视频
+        autoplay: false, // 自动播放
+        isLive: false, // 直播
+        rePlay: false, // 循环播放
+        preload: true,
+        controlBarVisibility: "hover", // 控制条的显示方式：鼠标悬停
+        useH5Prism: true, // 播放器类型：html5
+      },
+      function (player) {
+        console.log("播放器创建成功");
+      }
+    );
+  },
+};
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <link rel="stylesheet" href="//g.alicdn.com/de/prismplayer/2.6.0/skins/default/aliplayer-min.css" />
+//             <script type="text/javascript" src="//g.alicdn.com/de/prismplayer/2.6.0/aliplayer-min.js"></script>
+//             <script>
+// var palyerDom = document.createElement("div");
+// palyerDom.id = "J_prismPlayer";
+// palyerDom.style.width = "1920px";
+// palyerDom.style.height = "1280px";
+// palyerDom.className = "prism-player";
+// var body = document.getElementsByTagName("body");
+// if (body.length) {
+//   body[0].appendChild(palyerDom);
+//   var player = new Aliplayer({
+//     id: "J_prismPlayer",
+//     autoplay: true,
+//     width: "1920px",
+//     height: "1280px",
+//     vid: "3d8927be250c45b393ddf55247f74340",
+//     playauth: "",
+//     cover: "",
+//   });
+// }
+//
+</script>

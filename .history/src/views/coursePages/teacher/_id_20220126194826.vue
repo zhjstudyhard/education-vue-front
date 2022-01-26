@@ -67,7 +67,7 @@
                       <a
                         :href="'/course/' + course.id"
                         title="开始学习"
-                       
+                        target="_blank"
                         class="comm-btn c-btn-1"
                         >开始学习</a
                       >
